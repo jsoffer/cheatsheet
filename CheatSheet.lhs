@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 %include lhs2TeX.fmt
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
 \linespread{1.05}
@@ -41,10 +42,16 @@
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
 
-This cheat sheet lays out the fundamental elements of the Haskell language:
-syntax, keywords and other elements. It is presented as both an executable
-Haskell file and a printable document. Load the source into your favorite
-interpreter to play with code samples shown.
+Esta guía rápida abarca los elementos fundamentales del lenguaje Haskell:
+sintaxis, palabras clave y otros elementos. Se presenta como un archivo 
+ejecutable de Haskell y también como un documento para impresión. Cargue 
+la fuente en su intérprete favorito para jugar con los ejemplos de código
+mostrados.
+
+% This cheat sheet lays out the fundamental elements of the Haskell language:
+% syntax, keywords and other elements. It is presented as both an executable
+% Haskell file and a printable document. Load the source into your favorite
+% i nterpreter to play with code samples shown.
 
 \begin{comment}
 
@@ -64,19 +71,32 @@ interpreter to play with code samples shown.
 
 \shd{Comments}\label{comments}
 
-  A single line comment starts with `@--@' and extends to the end of the line.
-  Multi-line comments start with '@{-@' and extend to '@-}@'. Comments can be
-  nested.
+  Un comentario de una sola línea comienza con `@--@' y se extiende hasta el
+  final de la línea. Los comentarios de varias líneas comienzan con '@{-@' y se 
+  extienden hasta '@-}@'. Los comentarios pueden ser anidados.
 
-  Comments above function definitions should start with `@{- |@' and those next
-  to parameter types with `@-- ^@' for compatibility with
-  Haddock, a system for documenting
-  Haskell code.
+%  A single line comment starts with `@--@' and extends to the end of the line.
+%  Multi-line comments start with '@{-@' and extend to '@-}@'. Comments can be
+%  nested.
 
-\shd{Reserved Words}\label{reserved-words}
+  Los comentarios antes de las definiciones de función deben comenzar con `@{- |@'
+  y los que están junto a los tipos de parámetros con `@-- ^@' para que sean 
+  compatibles con Haddock, un sistema para documentar código en Haskell.
 
-  The following words are reserved in Haskell. It is a syntax error to give a
-  variable or a function one of these names.
+%  Comments above function definitions should start with `@{- |@' and those next
+%  to parameter types with `@-- ^@' for compatibility with
+%  Haddock, a system for documenting
+%  Haskell code.
+
+\shd{Palabras reservadas}\label{reserved-words}
+
+%\shd{Reserved Words}\label{reserved-words}
+
+  Las siguientes palabras están reservadas para Haskell. Es un error de sintaxis
+  darle a una variable o a una función uno de estos nombres.
+
+%  The following words are reserved in Haskell. It is a syntax error to give a
+%  variable or a function one of these names.
 
   \setlength{\columnsep}{10.0pt}
   \setlength{\columnseprule}{0.0pt}
@@ -107,47 +127,69 @@ interpreter to play with code samples shown.
   \setlength{\columnsep}{18.0pt}
   \setlength{\columnseprule}{0.4pt}
 
-\shd{Strings}\label{strings}
+\shd{Cadenas}\label{strings}
 
   \begin{compactitem}
-  \item @"abc"@ -- Unicode string, sugar for @['a','b','c']@.
-  \item @'a'@ -- Single character.
+  \item @"abc"@ -- Cadena Unicode string, azúcar sintáctica de @['a','b','c']@.
+  \item @'a'@ -- Un solo caracter.
+%  \item @"abc"@ -- Unicode string, sugar for @['a','b','c']@.
+%  \item @'a'@ -- Single character.
   \end{compactitem}
 
-  \sshd{Multi-line Strings}\label{multi-line-strings}
+  \sshd{Cadenas en varias líneas}\label{multi-line-strings}
+%  \sshd{Multi-line Strings}\label{multi-line-strings}
 
-  Normally, it is a syntax error if a string has any newline characters.
-  That is, this is a syntax error:
+  Normalmente, es un error de sintaxis si una cadena contiene caracteres de fin 
+  de línea. Eso es, esto es un error de sintaxis:
+
+%  Normally, it is a syntax error if a string has any newline characters.
+%  That is, this is a syntax error:
 
 < string1 = "My long
 < string."
 
-  Backslashes (`@\@') can ``escape'' a newline:
+  Se pueden emplear barras diagonales inversas (`@\@') para hacer ``escape'' de un 
+  fin de línea:
+
+%  Backslashes (`@\@') can ``escape'' a newline:
 
 > string1 = "My long \
 > \string."
 
-  The area between the backslashes is ignored. Newlines \emph{in} the
-  string must be represented explicitly:
+  El área entre las barras diagonales inversas es ignorada. Los fines de línea \emph{en}
+  la cadena deben ser representados explícitamente:
+
+%  The area between the backslashes is ignored. Newlines \emph{in} the
+%  string must be represented explicitly:
 
 > string2 = "My long \n\
 > \string."
 
-  That is, @string1@ evaluates to:
+  Eso es, @string1@ evalúa como 
+
+%  That is, @string1@ evaluates to:
 
 < My long string.
 
-  While @string2@ evaluates to:
+  Mientras @string2@ evalúa como:
+
+%  While @string2@ evaluates to:
 
 < My long
 < string.
 
-  \sshd{Escape Codes} The following escape codes can be used in characters or strings:
+
+  \sshd{Códigos de escape} Los siguientes códigos de escape pueden ser utilizados en caracteres o cadenas:
+%  \sshd{Escape Codes} The following escape codes can be used in characters or strings:
   \begin{compactitem}
-    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
-    \item @\72@, @\x48@, \@o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
-    \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
-    \todo{Control characters, ascii codes such as NUL}
+    \item @\n@, @\r@, @\f@, etc. -- Los códigos estándar para fin de línea, retorno de carro, avance de línea, etc. 
+    \item @\72@, @\x48@, \@o110@ -- Un caracter con el valor 72 en decimal, hexadecimal y octal, respectivamente. 
+    \item @\&@ -- El caracter de escape ``null'', es utilizado para que los códigos de escape numéricos puedan aparecer junto de las literales numéricas. Es equivalente a ``'' y por lo tanto no puede ser utilizado en literales de caracter. 
+    \todo{Caracteres de control, códigos ascii como NUL}
+%    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
+%    \item @\72@, @\x48@, \@o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
+%    \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
+%    \todo{Control characters, ascii codes such as NUL}
   \end{compactitem}
   
 
