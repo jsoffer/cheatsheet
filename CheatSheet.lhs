@@ -196,73 +196,115 @@ mostrados.
 \shd{Numbers}\label{numbers}
 
   \begin{compactitem}
-  \item @1@ -- Integer or floating point value.
-  \item @1.0, 1e10@ -- Floating point value.
-  \item @0o1, 0O1@ -- Octal value.
-  \item @0x1, 0X1@ -- Hexadecimal value.
- \item  @-1@ -- Negative number; the minus sign (``@-@'') cannot be separated from the number.
+  \item @1@ -- Entero o valor de punto flotante.
+  \item @1.0, 1e10@ -- Valor de punto flotante.
+  \item @0o1, 0O1@ -- Valor octal.
+  \item @0x1, 0X1@ -- Valor hexadecimal.
+ \item  @-1@ -- Número negativo; el signo de menos (``@-@'') no puede ir separado del número.
+%  \item @1@ -- Integer or floating point value.
+%  \item @1.0, 1e10@ -- Floating point value.
+%  \item @0o1, 0O1@ -- Octal value.
+%  \item @0x1, 0X1@ -- Hexadecimal value.
+% \item  @-1@ -- Negative number; the minus sign (``@-@'') cannot be separated from the number.
   \end{compactitem}
 
 \shd{Enumerations}\label{enumerations}
 
   \begin{compactitem}
-  \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
-  \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
-  \item @[110..100]@ -- Empty list; ranges only go forwards.
-  \item @[0, -1 ..]@ -- Negative integers.
-  \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
-  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.  
+  \item @[1..10]@ -- Lista de números -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
+  \item @[100..]@ -- Lista infinita de números -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
+  \item @[110..100]@ -- Lista vacía; los rangos solamente avanzan hacia adelante.
+  \item @[0, -1 ..]@ -- Enteros negativos.
+  \item @[-110..-100]@ -- Error de sintaxis; necesita @[-110.. -100]@ por los negativos.
+  \item @[1,3..99], [-1,3..99]@ -- Lista de 1 a 99, de 2 en 2; y de -1 a 99, de 4 en 4.  
+%  \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
+%  \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
+%  \item @[110..100]@ -- Empty list; ranges only go forwards.
+%  \item @[0, -1 ..]@ -- Negative integers.
+%  \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
+%  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.  
   \end{compactitem}
 
-  \noindent In fact, any value which is in the @Enum@ class can be used:
+%  \noindent In fact, any value which is in the @Enum@ class can be used:
+  \noindent De hecho, se puede usar cualquier valor que esté en la clase @Enum@:
 
   \begin{compactitem}
-  \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
+  \item @['a' .. 'z']@ -- Lista of caracteres -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
   \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
-  \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
+  \item @[UppercaseLetter ..]@ -- Lista de valores @GeneralCategory@ (en @Data.Char@).
+%  \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
+%  \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
+%  \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
   \end{compactitem}
 
 \shd{Lists \& Tuples}\label{lists-tuples}
 
   \begin{compactitem}
-  \item @[]@ -- Empty list.
-  \item @[1,2,3]@ -- List of three numbers.
-  \item @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).
-  \item @"abc"@ -- List of three characters (strings are lists).
-  \item @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).
-  \item @(1,"a")@ -- 2-element tuple of a number and a string.
-  \item @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
+  \item @[]@ -- Lista vacía.
+  \item @[1,2,3]@ -- Lista de tres números.
+  \item @1 : 2 : 3 : []@ -- Forma alterna de escribir listas usando ``cons'' (@:@) y ``nil'' (@[]@).
+  \item @"abc"@ -- Lista de tres caracteres (las cadenas son listas).
+  \item @'a' : 'b' : 'c' : []@ -- Lista de caracteres (lo mismo que @"abc"@).
+  \item @(1,"a")@ -- Tupla de dos elementos, un número y una cadena.
+  \item @(head, tail, 3, 'a')@ -- Tupla de cuatro elementos, dos funciones, un número y un caracter.
+%  \item @[]@ -- Empty list.
+%  \item @[1,2,3]@ -- List of three numbers.
+%  \item @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).
+%  \item @"abc"@ -- List of three characters (strings are lists).
+%  \item @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).
+%  \item @(1,"a")@ -- 2-element tuple of a number and a string.
+%  \item @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
   \end{compactitem}
 
 \shd{``Layout'' rule, braces and semi-colons.}\label{layout}
 
- Haskell can be written using braces and semi-colons, just like C. However, no
- one does. Instead, the ``layout'' rule is used, where spaces represent scope.
- The general rule is: always indent. When the compiler complains, indent more.
+ Se puede escribir Haskell utilizando llaves y puntos y coma, igual que en C. 
+ Sin embargo, nadie lo hace. En lugar de eso se emplea la regla ``layout'', donde
+ se emplea espacio en blanco para separar bloques. La regla general es: siempre 
+ usar sangrías. Cuando el compilador se queje, usar más.
+
+% Haskell can be written using braces and semi-colons, just like C. However, no
+% one does. Instead, the ``layout'' rule is used, where spaces represent scope.
+% The general rule is: always indent. When the compiler complains, indent more.
 
   \sshd{Braces and semi-colons}\label{braces-semicolons}
 
-  Semi-colons terminate an expression, and braces represent scope. They can be
-  used after several keywords: @where@, @let@, @do@ and @of@. They cannot be
-  used when defining a function body. For example, the below will not compile.
+  Los paréntesis finalizan una expresión, y las llaves representan bloques. Pueden
+  ser utilizados después de varias palabras clave: @where@, @let@, @do@ y @of@. No
+  pueden ser utilizados al definir el cuerpo de una función. Por ejemplo, esto no
+  compila:
+
+%  Semi-colons terminate an expression, and braces represent scope. They can be
+%  used after several keywords: @where@, @let@, @do@ and @of@. They cannot be
+%  used when defining a function body. For example, the below will not compile.
 
 <    square2 x = { x * x; }
 
-  However, this will work fine:
+  Sin embargo, esto funciona bien:
+
+%  However, this will work fine:
+
 
 > square2 x = result
 >     where { result = x * x; }
 
   \sshd{Function Definition}\label{layout-function-definition}
 
-  Indent the body at least one space from the function name:
+  Aplique una sangría de al menos un espacio a partir del nombre de la función:
+
+%  Indent the body at least one space from the function name:
 
 < square x  =
 <   x * x
 
-  Unless a @where@ clause is present. In that case, indent the where clause at
-  least one space from the function name and any function bodies at least one
-  space from the @where@ keyword:
+  A menos que esté presente una cláusula @where@. En ese caso, aplique la sangría
+  de la cláusula @where@ al menos un espacio a partir del nombre de la función y
+  todos los cuerpos de la función al menos a un espacio a partir de la palabra clave
+  @where@:
+
+%  Unless a @where@ clause is present. In that case, indent the where clause at
+%  least one space from the function name and any function bodies at least one
+%  space from the @where@ keyword:
 
 <  square x =
 <      x2
@@ -271,81 +313,124 @@ mostrados.
 
   \sshd{Let}\label{layout-let}
 
-  Indent the body of the let at least one space from the first definition in the
-  @let@. If @let@ appears on its own line, the body of any definition must
-  appear in the column after the let:
+
+  Aplique sangría sobre el cuerpo del @let@ al menos un espacio a partir de la primera
+  definición en el @let@. Si el @let@ aparece por sí solo en una línea, el cuerpo de 
+  cualquier definición debe aparecer en la columna después del @let@:
+
+%  Indent the body of the let at least one space from the first definition in the
+%  @let@. If @let@ appears on its own line, the body of any definition must
+%  appear in the column after the let:
 
 <  square x =
 <    let x2 =
 <          x * x
 <    in x2
 
-  As can be seen above, the @in@ keyword must also be in the same column as
-  @let@. Finally, when multiple definitions are given, all identifiers must
-  appear in the same column.
+  Como se puede ver arriba, la palabra clave @in2@ debe también estar en la misma columna
+  que el @let@. Finalmente, cuando se van múltiples definiciones, todos los identificadores
+  deben aparecer en la misma columna.
+
+%  As can be seen above, the @in@ keyword must also be in the same column as
+%  @let@. Finally, when multiple definitions are given, all identifiers must
+%  appear in the same column.
 
 \hd{Declarations, Etc.}\label{declarations}
 
-  The following section details rules on function declarations, list
-  comprehensions, and other areas of the language.
+  La siguiente sección describe las reglas para la declaración de funciones, las listas por
+  comprensión, y otras áreas del lenguaje.
+
+%  The following section details rules on function declarations, list
+%  comprehensions, and other areas of the language.
 
 \shd{Function Definition}\label{function-definition}
 
-  Functions are defined by declaring their name, any arguments, and an equals
-  sign:
+  Las funciones se definen declarando su nombre, los argumentos, y un signo de igual:
+
+%  Functions are defined by declaring their name, any arguments, and an equals
+%  sign:
 
 > square x = x * x
 
-  \emph{All} functions names must start with a lowercase letter or ``@_@''. It
-  is a syntax error otherwise.
+  \emph{Todos} los nombres de función deben comenzar con letra minúscula o ``@_@''. Es un error
+  de sintaxis de cualquier otra forma.
+
+%  \emph{All} functions names must start with a lowercase letter or ``@_@''. It
+%  is a syntax error otherwise.
 
   \sshd{Pattern Matching}\label{pattern-matching}
 
-  Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
-  the values of arguments. Here, the the @agree@ function has four separate
-  cases:
+  Se pueden definir varias ``cláusulas'' de una función haciendo ``comparación de patrones''
+  en los valores de los argumentos. Aquí, la función @agree@ tiene cuatro casos separados:
 
-> -- Matches when the string "y" is given.
+%  Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
+%  the values of arguments. Here, the the @agree@ function has four separate
+%  cases:
+
+> -- Coincide cuando se da la cadena "y".
 > agree1 "y" = "Great!"
-> -- Matches when the string "n" is given.
+> -- Coincide cuando se da la cadena "n".
 > agree1 "n" = "Too bad."
-> -- Matches when string beginning
-> -- with 'y' given.
+> -- Coincide cuando se da una cadena que
+> -- comienza con 'y'.
 > agree1 ('y':_) = "YAHOO!"
-> -- Matches for any other value given.
+> -- Coincide con cualquier otro valor.
 > agree1 _ = "SO SAD."
 
-  Note that the `@_@' character is a wildcard and matches any value.
 
-  Pattern matching can extend to nested values. Assuming this data declaration:
+  Nótese que el caracter `@_@' es un comodín y coincide con cualquier valor.
+
+%  Note that the `@_@' character is a wildcard and matches any value.
+
+  La comparación de patrones se puede extender a valores anidados. Asumiendo esta
+  declaración de dato:
+
+%  Pattern matching can extend to nested values. Assuming this data declaration:
 
 < data Bar = Bil (Maybe Int) | Baz
 
-  \noindent and recalling the \hyperref[maybe]{definition of @Maybe@} from
-  page~\pageref{maybe} we can match on nested @Maybe@ values when @Bil@ is
-  present:
+  \noindent y recordando la \hyperref[maybe]{definición de @Maybe@} de la 
+  página~\pageref{maybe} podemos hacer coincidir en valores @Maybe@ anidados 
+  cuando @Bil@ está presente:
+
+%  \noindent and recalling the \hyperref[maybe]{definition of @Maybe@} from
+%  page~\pageref{maybe} we can match on nested @Maybe@ values when @Bil@ is
+%  present:
 
 < f (Bil (Just _)) = ...
 < f (Bil Nothing) = ...
 < f Baz = ...
 
-  Pattern-matching also allows values to be assigned to variables. For example,
-  this function determines if the string given is empty or not. If not, the
-  value bound to @str@ is converted to lower case:
+  La comparación de patrones también permite que valores sean asociados a variables.
+  Por ejemplo, esta función determina si la cadena dada es o no vacía. Si no, el valor
+  asociado a @str@ es convertido a minúsculas:
+
+%  Pattern-matching also allows values to be assigned to variables. For example,
+%  this function determines if the string given is empty or not. If not, the
+%  value bound to @str@ is converted to lower case:
 
 > toLowerStr [] = []
 > toLowerStr str = map toLower str
 
-  Note that @str@ above is similer to @_@ in that it will match anything; the
-  only difference is that the value matched is also given a name.
+  Nótese que aquí @str@ es similar a @_@ en que va a coincidir con lo que sea; la única
+  diferencia es que al valor que coincide también se le da un nombre.
+
+%  Note that @str@ above is similer to @_@ in that it will match anything; the
+%  only difference is that the value matched is also given a name.
 
   \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
 
-  This (sometimes controversial) pattern-matching facility makes it easy to match
-  certain kinds of numeric expressions. The idea is to define a base case (the
-  ``$n$'' portion) with a constant number for matching, and then to define other
-  matches (the ``$k$'' portion) as additives to the base case. Here is a rather
-  inefficient way of testing if a number is even or not:
+  Esta (a veces controversial) comparación de patrones hace fácil coincidir con ciertos
+  tipos de expresiones numéricas. La idea es definir un caso base (la porción ``$n$'') con
+  un número constante para que coincida, y después definir las coincidencias (la porción ``$k$'')
+  como sumas sobre el caso base. Por ejemplo, esta es una forma ineficiente de determinar si
+  un número es o no par:
+
+%  This (sometimes controversial) pattern-matching facility makes it easy to match
+%  certain kinds of numeric expressions. The idea is to define a base case (the
+%  ``$n$'' portion) with a constant number for matching, and then to define other
+%  matches (the ``$k$'' portion) as additives to the base case. Here is a rather
+%  inefficient way of testing if a number is even or not:
 
 > isEven 0 = True
 > isEven 1 = False
@@ -353,11 +438,17 @@ mostrados.
 
   \sshd{Argument Capture}\label{argument-capture}
 
-  Argument capture is useful for pattern-matching a value \emph{and} using it,
-  without declaring an extra variable. Use an `|@|' symbol in between the
-  pattern to match and the variable to bind the value to. This facility is
-  used below to bind the head of the list in @l@ for display, while also
-  binding the entire list to @ls@ in order to compute its length:
+  La captura de argumentos es útip para comparar un patrón \emph{y} utilizarlo, sin
+  declarar una variable extra. Utilice un símbolo `|@|' entre el patrón a coincidir y 
+  la variable a la cual asociar el valor. Este mecanismo se utiliza en el siguiente ejemplo
+  para asociar el primer elemento de la lista en @l@ para mostrarlo, y al mismo tiempo asociar
+  la lista completa a @ls@ para calcular su longitud:
+
+%  Argument capture is useful for pattern-matching a value \emph{and} using it,
+%  without declaring an extra variable. Use an `|@|' symbol in between the
+%  pattern to match and the variable to bind the value to. This facility is
+%  used below to bind the head of the list in @l@ for display, while also
+%  binding the entire list to @ls@ in order to compute its length:
 
 > len ls@(l:_) = "List starts with " ++
 >   show l ++ " and is " ++
@@ -366,25 +457,35 @@ mostrados.
 
   \sshd{Guards}\label{function-guards}
 
-  Boolean functions can be used as ``guards'' in function definitions along with
-  pattern matching. An example without pattern matching:
+  Las funciones booleanas se pueden utilizar como ``guardas'' en definicione de 
+  función al mismo tiempo que la comparación de patrones. Un ejemplo sin comparación
+  de patrones:
+
+%  Boolean functions can be used as ``guards'' in function definitions along with
+%  pattern matching. An example without pattern matching:
 
 > which n
 >   | n == 0 = "zero!"
 >   | even n = "even!"
 >   | otherwise = "odd!"
 
-    Notice @otherwise@ -- it always evaluates to true and can be used to specify
-    a ``default'' branch.
+    Note el @otherwise@ -- siempre evalúa verdadero y puede ser utilizado para
+    especificar un caso por ``default''.
 
-    Guards can be used with patterns. Here is a function that determines if the
-    first character in a string is upper or lower case:
+%    Notice @otherwise@ -- it always evaluates to true and can be used to specify
+%    a ``default'' branch.
 
-> what [] = "empty string!"
+    Las guardas se pueden utilizar con patrones. El siguiente ejemplo es una función
+    que determina si el primer caracter en una cadena es mayúscula o minúscula:
+
+%    Guards can be used with patterns. Here is a function that determines if the
+%    first character in a string is upper or lower case:
+
+> what [] = "¡Cadena vacía!"
 > what (c:_)
->   | isUpper c = "upper case!"
->   | isLower c = "lower case"
->   | otherwise = "not a letter!"
+>   | isUpper c = "¡Mayúscula!"
+>   | isLower c = "¡Minúscula!"
+>   | otherwise = "¡No es letra!"
 
   \sshd{Matching \& Guard Order}\label{function-matching-order}
 
