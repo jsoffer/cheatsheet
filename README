@@ -4,6 +4,18 @@ Haskell CheatSheet
 Traducción al Español (UTF-8)
 Jaime Soffer <jaime.soffer@gmail.com>
 
+Para construir el PDF en *NIX (ver go.bat):
+
+Se requiere lhs2TeX (http://hackage.haskell.org/package/lhs2tex).
+
+$ lhs2TeX --verb CheatSheet.lhs > CheatSheet.tex
+$ pdflatex CheatSheet.tex
+
+Si hace falta "todo.sty", se puede descargar de CTAN 
+(http://www.ctan.org/cgi-bin/filenameSearch.py?filename=todo.sty&Search=Search) 
+en el mismo directorio que contiene CheatSheet.tex, y ejecutar '$ mktexlsr' para
+que el entorno TeX lo identifique.
+
 ----
 
 Written and maintained by Justin Bailey <jgbailey@codeslower.com>.
