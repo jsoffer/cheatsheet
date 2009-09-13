@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 %include lhs2TeX.fmt
 \usepackage[utf8]{inputenc}
+
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
 \linespread{1.05}
@@ -438,7 +439,7 @@ mostrados.
 
   \sshd{Argument Capture}\label{argument-capture}
 
-  La captura de argumentos es útip para comparar un patrón \emph{y} utilizarlo, sin
+  La captura de argumentos es útil para comparar un patrón \emph{y} utilizarlo, sin
   declarar una variable extra. Utilice un símbolo `|@|' entre el patrón a coincidir y 
   la variable a la cual asociar el valor. Este mecanismo se utiliza en el siguiente ejemplo
   para asociar el primer elemento de la lista en @l@ para mostrarlo, y al mismo tiempo asociar
@@ -465,9 +466,9 @@ mostrados.
 %  pattern matching. An example without pattern matching:
 
 > which n
->   | n == 0 = "zero!"
->   | even n = "even!"
->   | otherwise = "odd!"
+>   | n == 0 = "Cero"
+>   | even n = "Par"
+>   | otherwise = "Impar"
 
     Note el @otherwise@ -- siempre evalúa verdadero y puede ser utilizado para
     especificar un caso por ``default''.
@@ -481,17 +482,21 @@ mostrados.
 %    Guards can be used with patterns. Here is a function that determines if the
 %    first character in a string is upper or lower case:
 
-> what [] = "¡Cadena vacía!"
+> what [] = "Cadena vacía"
 > what (c:_)
->   | isUpper c = "¡Mayúscula!"
->   | isLower c = "¡Minúscula!"
->   | otherwise = "¡No es letra!"
+>   | isUpper c = "Mayúscula"
+>   | isLower c = "Minúscula"
+>   | otherwise = "No es letra"
 
   \sshd{Matching \& Guard Order}\label{function-matching-order}
 
-  Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
-  are tested from top to bottom. For example, neither of these functions would
-  be very interesting:
+  La comparación de patrones procede en un orden de arriba hacia abajo. De la misma
+  forma, las expresiones con guarda son evaluadas de la primera a la última. Por 
+  ejemplo, ninguna de estas funciones sería muy interesante:
+
+%  Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
+%  are tested from top to bottom. For example, neither of these functions would
+%  be very interesting:
 
 > allEmpty _ = False
 > allEmpty [] = True
@@ -502,9 +507,14 @@ mostrados.
 
   \sshd{Record Syntax}\label{matching-record-syntax}
 
-  Normally pattern matching occurs based on the position of arguments in the
-  value being matched. Types declared with record syntax, however, can match
-  based on those record names. Given this data type:
+  Normalmente la comparación de patrones ocurre basándose en la posición en
+  los argumentos del valor a coincidir. Los tipos que se declaran con 
+  sintaxis de registro, sin embargo, pueden coincidir basándose en los nombres
+  en el registro. Dado el siguiente tipo de datos:
+
+%  Normally pattern matching occurs based on the position of arguments in the
+%  value being matched. Types declared with record syntax, however, can match
+%  based on those record names. Given this data type:
 
 > data Color = C { red
 >   , green
@@ -516,14 +526,20 @@ mostrados.
 
 \end{comment}
 
-  \noindent we can match on @green@ only:
+  \noindent podemos hacer coincidir solamente @green@:
+
+%  \noindent we can match on @green@ only:
 
 > isGreenZero (C { green = 0 }) = True
 > isGreenZero _ = False
 
-  Argument capture is possible with this syntax, although it gets clunky.
-  Continuing the above, we now define a @Pixel@ type and a function to replace
-  values with non-zero @green@ components with all black:
+  Es posible capturar argumentos con esta sintaxis, aunque se vuelve incómodo. 
+  Continuando con el ejemplo, podemos definir un tipo @Pixel@ y una función que
+  reemplace con negro valores con componente @green@ diferente de cero: 
+
+%  Argument capture is possible with this syntax, although it gets clunky.
+%  Continuing the above, we now define a @Pixel@ type and a function to replace
+%  values with non-zero @green@ components with all black:
 
 > data Pixel = P Color
 
@@ -533,26 +549,39 @@ mostrados.
 
 \end{comment}
 
-> -- Color value untouched if green is 0
-> setGreen (P col@(C { green = 0 })) = P col
+> -- El valor del color no se 
+> -- modifica si green es 0
+> setGreen (P col@(C {green = 0})) = P col
 > setGreen _ = P (C 0 0 0)
 
   \sshd{Lazy Patterns}\label{lazy-patterns}
 
-  This syntax, also known as \emph{irrefutable} patterns, allows pattern matches
-  which always succeed. That means any clause using the pattern will succeed,
-  but if it tries to actually use the matched value an error may occur. This is
-  generally useful when an action should be taken on the \emph{type} of a
-  particular value, even if the value isn't present.
+  Esta sintaxis, también conocida como patrones \emph{irrefutables}, permite 
+  hacer comparación de patrones que siempre coincida. Esto significa que cualquier
+  cláusula utilizando el patrón tendrá éxito, pero si trata de utilizar el valor
+  que ha coincidido puede ocurrir un error. Esto es generalmente útil cuando se debe
+  realizar una acción basándose en el \emph{tipo} de un valor en particular, aún si
+  el valor no está presente.
 
-  For example, define a class for default values:
+%  This syntax, also known as \emph{irrefutable} patterns, allows pattern matches
+%  which always succeed. That means any clause using the pattern will succeed,
+%  but if it tries to actually use the matched value an error may occur. This is
+%  generally useful when an action should be taken on the \emph{type} of a
+%  particular value, even if the value isn't present.
+
+  Por ejemplo, defina una clase para valores por default:
+
+%  For example, define a class for default values:
 
 > class Def a where
 >   defValue :: a -> a
 
-  The idea is you give @defValue@ a value of the right type and it gives you
-  back a default value for that type. Defining instances for basic types is
-  easy:
+  La idea es que le dé a @defValue@ un valor del tipo correcto y regrese un valor
+  por default para ese tipo. Definir instancias para tipos básicos es fácil:
+
+%  The idea is you give @defValue@ a value of the right type and it gives you
+%  back a default value for that type. Defining instances for basic types is
+%  easy:
 
 > instance Def Bool where
 >   defValue _ = False
@@ -560,29 +589,47 @@ mostrados.
 > instance Def Char where
 >   defValue _ = ' '
 
-  @Maybe@ is a littler trickier, because we want to get a default value for the
-  type, but the constructor might be @Nothing@. The following definition would
-  work, but it's not optimal since we get @Nothing@ when @Nothing@ is passed in.
+  @Maybe@ es un poco más complicado, porque queremos obtener un valor por default
+  para el tipo, pero el constructor puede ser @Nothing@. La siguiente definición
+  podría funcionar, pero no es óptima porque obtenemos @Nothing@ cuando se le
+  pasa @Nothing@.
+
+%  @Maybe@ is a littler trickier, because we want to get a default value for the
+%  type, but the constructor might be @Nothing@. The following definition would
+%  work, but it's not optimal since we get @Nothing@ when @Nothing@ is passed in.
 
 < instance Def a => Def (Maybe a) where
 <   defValue (Just x) = Just (defValue x)
 <   defValue Nothing = Nothing
 
-  We'd rather get a {\tt Just (\rm\emph{default value}\tt)\rm} back instead.
-  Here is where a lazy pattern saves us -- we can pretend that we've matched
-  @Just x@ and use that to get a default value, even if @Nothing@ is given:
+  Preferiríamos mejor obtener un valor {\tt Just (\rm\emph{valor por default}\tt)\rm}.
+  Aquí es donde un patrón perezoso ayuda -- podemos aparentar que hemos hecho coincidir
+  con @Just x@ y usar eso para obtener un valor por default, aún si entra @Nothing@:
+
+%  We'd rather get a {\tt Just (\rm\emph{default value}\tt)\rm} back instead.
+%  Here is where a lazy pattern saves us -- we can pretend that we've matched
+%  @Just x@ and use that to get a default value, even if @Nothing@ is given:
 
 > instance Def a => Def (Maybe a) where
 >   defValue ~(Just x) = Just (defValue x)
 
-  As long as the value @x@ is not actually evaluated, we're safe. None of the
-  base types need to look at @x@ (see the ``@_@'' matches they use), so things
-  will work just fine.
+  Mientras el valor @x@ no sea evaluado, estamos a salvo. Ninguno de los tipos base
+  necesita inspeccionar @x@ (ver la coincidencia con ``@_@'' que usan), así que funcionará
+  bien.
 
-  One wrinkle with the above is that we must provide type annotations in the
-  interpreter or the code when using a @Nothing@ constructor. @Nothing@ has type
-  @Maybe a@ but, if not enough other information is available, Haskell must be
-  told what @a@ is. Some example default values:
+%  As long as the value @x@ is not actually evaluated, we're safe. None of the
+%  base types need to look at @x@ (see the ``@_@'' matches they use), so things
+%  will work just fine.
+
+  Un inconveniente con esto es que debemos proporcionar anotaciones de tipo en el intérprete
+  o en el código cuando usemos un constructor @Nothing@. @Nothing@ tiene tipo @Maybe a@ pero, 
+  a falta de información adicional, se debe informar a Haskell qué es @a@. Algunos ejemplos
+  de valores por default:
+
+%  One wrinkle with the above is that we must provide type annotations in the
+%  interpreter or the code when using a @Nothing@ constructor. @Nothing@ has type
+%  @Maybe a@ but, if not enough other information is available, Haskell must be
+%  told what @a@ is. Some example default values:
 
 > -- Return "Just False"
 > defMB = defValue (Nothing :: Maybe Bool)
@@ -591,28 +638,45 @@ mostrados.
 
 \shd{List Comprehensions}\label{list-comprehensions}
 
-  A list comprehension consists of four types of elements: \emph{generators},
-  \emph{guards}, \emph{local bindings}, and \emph{targets}. A list comprehension
-  creates a list of target values based on the generators and guards given. This
-  comprehension generates all squares:
+  Una lista por comprensión consiste de cuatro tipos de elementos: \emph{generadores},
+  \emph{guardas}, \emph{asociaciones locales}, y \emph{objetivos}. Una lista por 
+  comprensión crea una lista de valores objetivo basados en los generadores y en las
+  guardas proporcionados. Esta comprensión genera todos los cuadrados:
+
+%  A list comprehension consists of four types of elements: \emph{generators},
+%  \emph{guards}, \emph{local bindings}, and \emph{targets}. A list comprehension
+%  creates a list of target values based on the generators and guards given. This
+%  comprehension generates all squares:
 
 > squares = [x * x | x <- [1..]]
 
-  @x <- [1..]@ generates a list of all @Integer@ values and puts them in @x@,
-  one by one. @x * x@ creates each element of the list by multiplying @x@ by
-  itself.
+  @x <- [1..]@ genera una lista de todos los valores enteros positivos y los
+  coloca en @x@, uno por uno. @x * x@ crea cada elemento de la lista multiplicando
+  @x@ por sí mismo.
 
-  Guards allow certain elements to be excluded. The following shows how divisors
-  for a given number (excluding itself) can be calculated. Notice how @d@ is
-  used in both the guard and target expression.
+%  @x <- [1..]@ generates a list of all @Integer@ values and puts them in @x@,
+%  one by one. @x * x@ creates each element of the list by multiplying @x@ by
+%  itself.
+
+  Las guardas permiten que algunos elementos sean omitidos. El ejemplo a continuación
+  muestra cómo calcular los divisores (excluyendo a él mismo) para cierto número. Notar
+  cómo se usa el mismo @d@ en la guarda y en la expresión objetivo.
+
+%  Guards allow certain elements to be excluded. The following shows how divisors
+%  for a given number (excluding itself) can be calculated. Notice how @d@ is
+%  used in both the guard and target expression.
 
 > divisors n =
 >   [d | d <- [1..(n `div` 2)]
 >      , n `mod` d == 0]
 
-  Local bindings provide new definitions for use in the generated expression or
-  subsequent generators and guards. Below, @z@ is used to represent the minimum
-  of @a@ and @b@:
+  Las asociaciones locales proveen nuevas definiciones para usar en la expresión
+  generada o en las guardas y generadores que las siguen. Debajo, @z@ es empleado 
+  para representar el mínimo de @a@ y @b@:
+
+%  Local bindings provide new definitions for use in the generated expression or
+%  subsequent generators and guards. Below, @z@ is used to represent the minimum
+%  of @a@ and @b@:
 
 > strange = [(a,z) | a <-[1..3]
 >                  , b <-[1..3]
@@ -620,22 +684,31 @@ mostrados.
 >                  , let z = min a b
 >                  , z < c ]
 
-  Comprehensions are not limited to numbers. Any list will do. All upper case
-  letters can be generated:
+  Las comprensiones no están limitadas a números. Funcionan con cualquier lista.
+  Se pueden generar todas las letras mayúsculas:
+
+%  Comprehensions are not limited to numbers. Any list will do. All upper case
+%  letters can be generated:
 
 > ups =
 >   [c | c <- [minBound .. maxBound]
 >      , isUpper c]
 
-  Or, to find all occurrences of a particular break value @br@ in a list @word@
-  (indexing from 0):
+  O, para encontrar todas las apariciones de un valor @br@ en una lista de
+  palabras (con índices desde cero):
 
-> idxs word br =
->   [i | (i, c) <- zip [0..] word
+%  Or, to find all occurrences of a particular break value @br@ in a list @word@
+%  (indexing from 0):
+
+> idxs palabras br =
+>   [i | (i, c) <- zip [0..] palabras
 >       , c == br]
 
-  A unique feature of list comprehensions is that pattern matching failures do
-  not cause an error; they are just excluded from the resulting list.
+  Un aspecto único de las listas por comprensión es que los errores en la comparación 
+  de patrones no causan un error; simplemente son omitidos de la lista resultante.
+
+%  A unique feature of list comprehensions is that pattern matching failures do
+%  not cause an error; they are just excluded from the resulting list.
 
 \shd{Operators}\label{operators}
 
