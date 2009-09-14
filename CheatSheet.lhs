@@ -712,16 +712,27 @@ mostrados.
 
 \shd{Operators}\label{operators}
 
-  There are very few predefined ``operators'' in Haskell---most that appear
-  predefined are actually syntax (e.g., ``@=@''). Instead, operators are simply
-  functions that take two arguments and have special syntactic support. Any
-  so-called operator can be applied as a prefix function using parentheses:
+  Hay muy pocos ``operadores'' predefinidos en Haskell---muchos que parecen estar
+  predefinidos en realidad son sintaxis (e.g. ``@=@''). En lugar de eso, los 
+  operadores son simplemente funciones que toman dos argumentos y tienen un 
+  soporte sintáctico especial. Cualquier así llamado operador puede ser aplicado
+  como una función prefijo usando paréntesis:
+
+%  There are very few predefined ``operators'' in Haskell---most that appear
+%  predefined are actually syntax (e.g., ``@=@''). Instead, operators are simply
+%  functions that take two arguments and have special syntactic support. Any
+%  so-called operator can be applied as a prefix function using parentheses:
 
 < 3 + 4 == (+) 3 4
 
-  To define a new operator, simply define it as a normal function, except the
-  operator appears between the two arguments. Here's one which inserts a
-  comma between two strings and ensures no extra spaces appear:
+  Para definir un nuevo operador, simplemente defínalo como una función normal,
+  excepto que el operador aparezca entre los dos argumentos. Este es uno que 
+  inserta una coma entre dos cadenas y asegura que no aparezcan espacios 
+  adicionales:
+
+%  To define a new operator, simply define it as a normal function, except the
+%  operator appears between the two arguments. Here's one which inserts a
+%  comma between two strings and ensures no extra spaces appear:
 
 > first ## last =
 >   let trim s = dropWhile isSpace
@@ -732,79 +743,118 @@ mostrados.
 < > "  Haskell " ## " Curry "
 < Curry, Haskell
 
-  Of course, full pattern matching, guards, etc. are available in this form.
-  Type signatures are a bit different, though. The operator ``name'' must appear
-  in parentheses:
+  Por supuesto, comparación de patrones, guardas, etc. están disponibles en 
+  esta forma. Los tipos son un poco diferentes. El operador ``nombre'' debe
+  aparecer entre paréntesis:
+
+%  Of course, full pattern matching, guards, etc. are available in this form.
+%  Type signatures are a bit different, though. The operator ``name'' must appear
+%  in parentheses:
 
 > (##) :: String -> String -> String
 
-  Allowable symbols which can be used to define operators are:
+  Los símbolos que se permite usar para definir operadores son:
 
-< # $ % & * + . / < = > ? @ \ ^ | - ~
+%  Allowable symbols which can be used to define operators are:
 
-  However, there are several ``operators'' which cannot be redefined. They are:
-  @<-@, @->@ and @=@. The last, @=@, cannot be redefined by itself, but can be
-  used as part of multi-character operator. The ``bind'' function, @>>=@, is one
-  example.
+< # \$ % & * + . / < = > ? @ \ ^ | - ~
+
+  Sin embargo, hay varios ``operadores'' que no pueden ser redefinidos. Estos
+  son @<-@, @->@ y @=@. En sí mismos no se les puede asignar nueva funcionalidad,
+  pero pueden ser utilizados como parte de un operador multicaracter. La función
+  ``bind'', @>>=@, es un ejemplo.
+
+%  However, there are several ``operators'' which cannot be redefined. They are:
+%  @<-@, @->@ and @=@. The last, @=@, cannot be redefined by itself, but can be
+%  used as part of multi-character operator. The ``bind'' function, @>>=@, is one
+%  example.
 
   \sshd{Precedence \& Associativity}\label{fixity}
 
-  The precedence and associativity, collectively called \emph{fixity}, of any
-  operator can be set through the @infix@, @infixr@ and @infixl@ keywords. These
-  can be applied both to top-level functions and to local definitions. The
-  syntax is:
+  La precedencia y asociatividad, colectivamente llamadas \emph{fijidad}, de cualquier
+  operador, pueden ser establecidos a través de las palabras clave @infix@, @infixr@ e
+  @infixl@. Éstas pueden ser aplicadas a funciones en el nivel superior o a definiciones
+  locales. La sintaxis es:
+
+%  The precedence and associativity, collectively called \emph{fixity}, of any
+%  operator can be set through the @infix@, @infixr@ and @infixl@ keywords. These
+%  can be applied both to top-level functions and to local definitions. The
+%  syntax is:
 
 \bigskip
-  \texttt{infix} || \texttt{infixr} || \texttt{infixl} \emph{precedence} \emph{op}
+  \texttt{infix} || \texttt{infixr} || \texttt{infixl} \emph{precedencia} \emph{op}
 \bigskip
 
-  \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually
-  be any function which takes two arguments (i.e., any binary operation).
-  Whether the operator is left or right associative is specified by @infixl@ or
-  @infixr@, respectively. Such @infix@ declarations have no associativity.
+  \noindent donde \emph{precedencia} varía de 0 a 9. \emph{Op} puede ser cualquier
+  función que tome dos argumentos (i.e., cualquier operación binaria). Que el operador
+  sea asociativo por la izquierda o por la derecha está especificado por @infixl@ o
+  @infixr@, respectivamente. La declaración @infix@ no tiene asociatividad.
 
-  Precedence and associativity make many of the rules of arithmetic work ``as
-  expected.'' For example, consider these minor updates to the precedence of
-  addition and multiplication:
+%  \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually
+%  be any function which takes two arguments (i.e., any binary operation).
+%  Whether the operator is left or right associative is specified by @infixl@ or
+%  @infixr@, respectively. Such @infix@ declarations have no associativity.
+
+  La precedencia y la asociatividad hacen que muchas de las reglas de la aritmética
+  funcionen ``como se espera''. Por ejemplo, considere las siguientes modificaciones
+  menores a la precedencia de la suma y multiplicación:
+
+%  Precedence and associativity make many of the rules of arithmetic work ``as
+%  expected.'' For example, consider these minor updates to the precedence of
+%  addition and multiplication:
 
 > infixl 8 `plus1`
 > plus1 a b = a + b
 > infixl 7 `mult1`
 > mult1 a b = a * b
 
-  The results are surprising:
+  Los resultados son sorpresivos:
+
+%  The results are surprising:
 
 < > 2 + 3 * 5
 < 17
 < > 2 `plus1` 3 `mult1` 5
 < 25
 
-  Reversing associativity also has interesting effects. Redefining division as
-  right associative:
+  Revertir la asociatividad también tiene efectos interesantes. Redefiniendo la
+  división como asociativa por la derecha:
+
+%  Reversing associativity also has interesting effects. Redefining division as
+%  right associative:
 
 > infixr 7 `div1`
 > div1 a b = a / b
 
-  We get interesting results:
+  Obtenemos resultados interesantes:
+
+%  We get interesting results:
 
 < > 20 / 2 / 2
 < 5.0
 < > 20 `div1` 2 `div1` 2
 < 20.0
 
-\shd{Currying}\label{currying}
+\shd{Aplicación parcial}\label{currying}
 
- In Haskell, functions do not have to get all of their arguments at once. For
- example, consider the @convertOnly@ function, which only converts certain
- elements of string depending on a test:
+  En Haskell las funciones no tienen que recibir todos sus argumentos de una vez.
+  Por ejemplo, considere la función @convertOnly@, que solamente convierte ciertos
+  elementos de una cadena dependiendo de una prueba:
+
+% In Haskell, functions do not have to get all of their arguments at once. For
+% example, consider the @convertOnly@ function, which only converts certain
+% elements of string depending on a test:
 
 > convertOnly test change str =
 >     map (\c -> if test c
 >                 then change c
 >                 else c) str
 
- Using @convertOnly@, we can write the @l33t@ function which converts certain
- letters to numbers:
+ Usando @convertOnly@ podemos escribir la función @l33t@ que convierte ciertas
+ letras a números:
+
+% Using @convertOnly@, we can write the @l33t@ function which converts certain
+% letters to numbers:
 
 > l33t = convertOnly isL33t toL33t
 >   where
@@ -817,56 +867,92 @@ mostrados.
 >     -- etc.
 >     toL33t c = c
 
- Notice that @l33t@ has no arguments specified. Also, the final argument to
- @convertOnly@ is not given. However, the type signature of @l33t@ tells the
- whole story:
+ Nótese que @l33t@ no tiene argumentos especificados. También, que el argumento
+ final de @convertOnly@ no es proporcionado. Sin embargo, el tipo de @l33t@ cuenta
+ la historia completa
+
+% Notice that @l33t@ has no arguments specified. Also, the final argument to
+% @convertOnly@ is not given. However, the type signature of @l33t@ tells the
+% whole story:
 
 < l33t :: String -> String
 
- That is, @l33t@ takes a string and produces a string. It is a ``constant'', in
- the sense that @l33t@ always returns a value that is a function which takes a
- string and produces a string. @l33t@ returns a ``curried'' form of
- @convertOnly@, where only two of its three arguments have been supplied.
+ Eso es, @l33t@ toma una cadena y produce una cadena. Es ``contante'' en el sentido
+ de que @l33t@ siempre regresa un valos que es una función que toma una cadena y 
+ produce una cadena. @l33t@ regresa una versión ``currificada'' de @convertOnly@, 
+ donde solamente dos de sus tres argumentos han sido provistos.
 
- This can be taken further. Say we want to write a function which only changes
- upper case letters. We know the test to apply, @isUpper@, but we don't want to
- specify the conversion. That function can be written as:
+% That is, @l33t@ takes a string and produces a string. It is a ``constant'', in
+% the sense that @l33t@ always returns a value that is a function which takes a
+% string and produces a string. @l33t@ returns a ``curried'' form of
+% @convertOnly@, where only two of its three arguments have been supplied.
+
+ Esto puede ser llevado más lejos. Digamos que queremos escribir una función
+ que solamente cambie letras mayúsculas. Sabemos cual es la prueba a aplicar,
+ @isUpper@, pero no queremos especificar la conversión. Esa función puede ser 
+ escrita como:
+
+% This can be taken further. Say we want to write a function which only changes
+% upper case letters. We know the test to apply, @isUpper@, but we don't want to
+% specify the conversion. That function can be written as:
 
 > convertUpper = convertOnly isUpper
 
- which has the type signature:
+ Que tiene el tipo:
+
+% which has the type signature:
 
 < convertUpper :: (Char -> Char)
 <   -> String -> String
 
- That is, @convertUpper@ can take two arguments. The first is the conversion
- function which converts individual characters and the second is the string to
- be converted.
+ Eso es, @convertUpper@ puede tomar dos argumentos. El primero es la función de
+ conversión que convierte caracteres individuales y el segundo es la cadena que
+ se va a convertir.
 
- A curried form of any function which takes multiple arguments can be created.
- One way to think of this is that each ``arrow'' in the function's signature
- represents a new function which can be created by supplying one more argument.
+% That is, @convertUpper@ can take two arguments. The first is the conversion
+% function which converts individual characters and the second is the string to
+% be converted.
+
+ Se pueden crear una forma currificada de cualquier función que toma múltiples 
+ argumentos. Una forma de pensar esto es que cada ``flecha'' en el tipo de la
+ función representa una nueva función que puede ser creada al proveer más
+ argumentos. 
+
+% A curried form of any function which takes multiple arguments can be created.
+% One way to think of this is that each ``arrow'' in the function's signature
+% represents a new function which can be created by supplying one more argument.
 
  \sshd{Sections}\label{sections}
 
- Operators are functions, and they can be curried like any other. For example, a
- curried version of ``@+@'' can be written as:
+ Los operadores son funciones, y pueden ser currificados como cualquier otro. 
+ Por ejemplo, una versión currificada de ``@+@'' se puede escribir como:
+
+% Operators are functions, and they can be curried like any other. For example, a
+% curried version of ``@+@'' can be written as:
 
 < add10 = (+) 10
 
- However, this can be unwieldy and hard to read. ``Sections'' are curried
- operators, using parentheses. Here is @add10@ using sections:
+ Sin embargo esto es incómodo y difícil de leer. Las ``secciones'' son operadores
+ currificados, usando paréntesis. Este es @add10@ usando secciones:
+
+% However, this can be unwieldy and hard to read. ``Sections'' are curried
+% operators, using parentheses. Here is @add10@ using sections:
 
 > add10 = (10 +)
 
- The supplied argument can be on the right or left, which indicates what
- position it should take. This is important for operations such as
- concatenation:
+ El argumento provisto puede estar del lado izquierdo o derecho, lo que indica qué
+ posición debe tomar. Esto es importante para operaciones como la concatenación:
+
+% The supplied argument can be on the right or left, which indicates what
+% position it should take. This is important for operations such as
+% concatenation:
 
 > onLeft str = (++ str)
 > onRight str = (str ++)
 
- Which produces quite different results:
+ Que produce resultados diferentes:
+
+% Which produces quite different results:
 
 < > onLeft "foo" "bar"
 < "barfoo"
@@ -875,55 +961,89 @@ mostrados.
 
 \shd{``Updating'' values and record syntax}\label{updating}
 
-  Haskell is a pure language and, as such, has no mutable state. That is, once a
-  value is set it never changes. ``Updating'' is really a copy operation, with
-  new values in the fields that ``changed.'' For example, using the @Color@ type
-  defined earlier, we can write a function that sets the @green@ field to zero
-  easily:
+  Haskell es un lenguaje puro y, como tal, no tiene estado mutable. Eso es, una
+  vez que un valor ha sido establecido nunca cambia. ``Actualizar'' es en realidad
+  una operación de copiado, con valores nuevos en los campos que ``cambiaron''. Por
+  ejemplo, usando el tipo @Color@ definido antes, podemos escribir una función que 
+  establece a cero el campo @green@ fácilmente:
+
+%  Haskell is a pure language and, as such, has no mutable state. That is, once a
+%  value is set it never changes. ``Updating'' is really a copy operation, with
+%  new values in the fields that ``changed.'' For example, using the @Color@ type
+%  defined earlier, we can write a function that sets the @green@ field to zero
+%  easily:
 
 > noGreen1 (C r _ b) = C r 0 b
 
-  The above is a bit verbose and can be rewriten using record syntax. This kind
-  of ``update'' only sets values for the field(s) specified and copies the rest:
+  Esto es algo extenso y puede ser vuelto a escribir con sintaxis de registros. 
+  Este tipo de ``actualización'' solamente establece valores para los campos 
+  especificados y copia los demás:
+
+%  The above is a bit verbose and can be rewriten using record syntax. This kind
+%  of ``update'' only sets values for the field(s) specified and copies the rest:
 
 > noGreen2 c = c { green = 0 }
 
-  Here we capture the @Color@ value in @c@ and return a new @Color@ value.  That
-  value happens to have the same value for @red@ and @blue@ as @c@ and it's
-  @green@ component is 0. We can combine this with pattern matching to set the
-  @green@ and @blue@ fields to equal the @red@ field:
+  Aquí capturamos el valor @Color@ en @c@ y devolvemos un nuevo valor @Color@. Ese
+  valor resulta tener el mismo valor para @red@ y @blue@ que @c@ y su componente 
+  @green@ es 0. Podemos combinar esto con comparación de patrones para establecer 
+  los campos @green@ y @blue@ para que sean iguales al campo @red@:
+
+%  Here we capture the @Color@ value in @c@ and return a new @Color@ value.  That
+%  value happens to have the same value for @red@ and @blue@ as @c@ and it's
+%  @green@ component is 0. We can combine this with pattern matching to set the
+%  @green@ and @blue@ fields to equal the @red@ field:
 
 > makeGrey c@(C { red = r }) =
 >   c { green = r, blue = r }
 
-  Notice we must use argument capture (``|c@|'') to get the @Color@ value and
-  pattern matching with record syntax (``|C { red = r}|'') to get the inner
-  @red@ field.
+  Nótese que debemos usar captura de argumentos (``|c@|'') para obtener el valor
+  de @Color@ y comparar con sintaxis de registros (``|C { red = r}|'') para obtener
+  el campo interno @red@.
+
+%  Notice we must use argument capture (``|c@|'') to get the @Color@ value and
+%  pattern matching with record syntax (``|C { red = r}|'') to get the inner
+%  @red@ field.
 
 \shd{Anonymous Functions}\label{anonymous-functions}
 
-  An anonymous function (i.e., a \emph{lambda expression} or \emph{lambda} for
-  short), is a function without a name. They can be defined at any time like so:
+  Una función anónima (i.e., una \emph{expresión lambda} o simplemente \emph{lambda})
+  es una función sin nombre. Pueden ser definidas en cualquier momento de la
+  siguiente forma:
+
+%  An anonymous function (i.e., a \emph{lambda expression} or \emph{lambda} for
+%  short), is a function without a name. They can be defined at any time like so:
 
 < \c -> (c, c)
 
-  which defines a function which takes an argument and returns a tuple
-  containing that argument in both positions. They are useful for simple
-  functions which don't need a name. The following determines if a string
-  consists only of mixed case letters and whitespace.
+  que define una función que toma un argumento y regresa un tuple conteniendo ese
+  argumento en ambas posiciones. Éstas son útiles para funciones simples donde no
+  necesitamos un nombre. El ejemplo siguiente determina si una cadena consiste 
+  solamente de letras mayúsculas o minúsculas y espacio en blanco.
+
+%  which defines a function which takes an argument and returns a tuple
+%  containing that argument in both positions. They are useful for simple
+%  functions which don't need a name. The following determines if a string
+%  consists only of mixed case letters and whitespace.
 
 > mixedCase str =
 >   all (\c -> isSpace c ||
 >              isLower c ||
 >              isUpper c) str
 
-  Of course, lambdas can be the returned from functions too. This classic
-  returns a function which will then multiply its argument by the one originally
-  given:
+  Por supuesto, las lambdas pueden ser regresadas también de otras funciones. Este
+  clásico regresa una función que multiplicará su argumento por el que se ha dado
+  originalmente:
+
+%  Of course, lambdas can be the returned from functions too. This classic
+%  returns a function which will then multiply its argument by the one originally
+%  given:
 
 > multBy n = \m -> n * m
 
-  For example:
+  Por ejemplo:
+
+%  For example:
 
 < > let mult10 = multBy 10
 < > mult10 10
