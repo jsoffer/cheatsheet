@@ -1504,7 +1504,7 @@ mostrados.
 > whichCon con = "convalue is " ++
 >   conValue con
 
-  Si @whichCon@ es llamado con un valor @Noncon@, ocurrirá un error.
+  Si @whichCon@ es invocado con un valor @Noncon@, ocurrirá un error.
 
 %  If @whichCon@ is called with a @Noncon@ value, a runtime error will occur.
 
@@ -1516,78 +1516,126 @@ mostrados.
 
   \sshd{Class Constraints}\label{class-constraints}
 
-  Data types can be declared with class constraints on the type variables, but
-  this practice is generally discouraged. It is generally better to hide the
-  ``raw'' data constructors using the module system and instead export ``smart''
-  constructors which apply appropriate constraints. In any case, the syntax used
-  is:
+  Se pueden declarar tipos de datos con restricciones de clase en las variables
+  de tipo, pero en general esta práctica es desaprobada. Generalmente es mejor
+  ocultar los constructores de datos empleando el sistema de módulos y exportar
+  constructores ``inteligentes'' que apliquen las restricciones apropiadas. En
+  cualquier caso, la sintaxis es:
+
+%  Data types can be declared with class constraints on the type variables, but
+%  this practice is generally discouraged. It is generally better to hide the
+%  ``raw'' data constructors using the module system and instead export ``smart''
+%  constructors which apply appropriate constraints. In any case, the syntax used
+%  is:
 
 > data (Num a) => SomeNumber a = Two a a
 >   | Three a a a
-
-  This declares a type @SomeNumber@ which has one type variable argument. Valid
-  types are those in the @Num@ class.
+ 
+ Esto declara un tipo @SomeNumber@ que tiene un argumento de variable de tipo.
+ Los tipos válidos son los que están en la clase @Num@.
+ 
+% This declares a type @SomeNumber@ which has one type variable argument. Valid
+%  types are those in the @Num@ class.
 
   \sshd{Deriving}\label{deriving}
 
-  Many types have common operations which are tedious to define yet necessary,
-  such as the ability to convert to and from strings, compare for equality, or
-  order in a sequence. These capabilities are defined as typeclasses in Haskell.
+  Muchos tipos tienen operaciones en común que son tediosas para definir aunque
+  necesarias, como la habilidad de convertir de y a cadenas, comparar igualdad, 
+  u ordenar en secuencia. Esas capacidades están definidas como clases de tipos
+  en Haskell.
 
-  Because seven of these operations are so common, Haskell provides the
-  @deriving@ keyword which will automatically implement the typeclass on the
-  associated type. The seven supported typeclasses are: @Eq@, @Read@, @Show@,
-  @Ord@, @Enum@, @Ix@, and @Bounded@.
+%  Many types have common operations which are tedious to define yet necessary,
+%  such as the ability to convert to and from strings, compare for equality, or
+%  order in a sequence. These capabilities are defined as typeclasses in Haskell.
 
-  Two forms of @deriving@ are possible. The first is used when a type only
-  derives one class:
+  Como siete de estas operaciones son muy comunes, Haskell provee la palabra clave
+  @deriving@ que automáticamente implementa la clase de tipos al tipo asociado. 
+  Las siete clases de tipos que permiten hacerlo son: @Eq@, @Read@, @Show@,
+  @Ord@, @Enum@, @Ix@, y @Bounded@.
+
+%  Because seven of these operations are so common, Haskell provides the
+%  @deriving@ keyword which will automatically implement the typeclass on the
+%  associated type. The seven supported typeclasses are: @Eq@, @Read@, @Show@,
+%  @Ord@, @Enum@, @Ix@, and @Bounded@.
+
+  Hay dos formas de usar @deriving@. La primera se utiliza cuando un tipo 
+  solamente deriva una clase:
+
+%  Two forms of @deriving@ are possible. The first is used when a type only
+%  derives one class:
 
 > data Priority = Low | Medium | High
 >   deriving Show
 
-  The second is used when multiple classes are derived:
+  El segundo es usado cuando se derivan múltiples clases:
+
+%  The second is used when multiple classes are derived:
 
 > data Alarm = Soft | Loud | Deafening
 >   deriving (Read, Show)
 
-  It is a syntax error to specify @deriving@ for any other classes besides the
-  six given above.
+  Es un error de sintaxis especificar @deriving@ para ninguna otra clase
+  además de las indicadas.
+
+%  It is a syntax error to specify @deriving@ for any other classes besides the
+%  six given above.
 
 \shd{Deriving}
 
-  See the section on \hyperref[deriving]{@deriving@} under the @data@ keyword on
-  page~\pageref{deriving}.
+  Vea la sección en \hyperref[deriving]{@deriving@} bajo la palabra clave @data@
+  en la página~\pageref{deriving}.
+
+%  See the section on \hyperref[deriving]{@deriving@} under the @data@ keyword on
+%  page~\pageref{deriving}.
 
 \shd{Do}\label{do}
 
-  The @do@ keyword indicates that the code to follow will be in a \emph{monadic}
-  context. Statements are separated by newlines, assignment is indicated by
-  @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
+  La palabra clave @do@ indica que el código a continuación estará en un contexto
+  \emph{monádico}. Las declaraciones están separadas por saltos de línea, la
+  ``asignación'' es indicada por @<-@, y se puede emplear una forma de @let@ que
+  no requiere la palabra clave @in@.
+
+%  The @do@ keyword indicates that the code to follow will be in a \emph{monadic}
+%  context. Statements are separated by newlines, assignment is indicated by
+%  @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
 
   \sshd{If and IO}\label{if-io}
 
-  @if@ can be tricky when used with IO. Conceptually it is no different from an
-  @if@ in any other context, but intuitively it is hard to develop. Consider the
-  function @doesFileExists@ from @System.Directory@:
+  @if@ puede ser complicado cuando se utiliza con IO. Conceptualmente no es diferente
+  de un @if@ en cualquier otro contexto, pero intuitivamente es difícil de asimilar.
+  Considere la función @doesFileExists@ de @System.Directory@:
+
+%  @if@ can be tricky when used with IO. Conceptually it is no different from an
+%  @if@ in any other context, but intuitively it is hard to develop. Consider the
+%  function @doesFileExists@ from @System.Directory@:
 
 < doesFileExist :: FilePath -> IO Bool
 
-  The @if@ statement has this ``signature'':
+  La declaración @if@ tiene esta pseudo-``declaración de tipos'':
+
+%  The @if@ statement has this ``signature'':
 
 < if-then-else :: Bool -> a -> a -> a
 
-  That is, it takes a @Bool@ value and evaluates to some other value based on
-  the condition. From the type signatures it is clear that @doesFileExist@
-  cannot be used directly by @if@:
+  Eso es, toma un valor @Bool@ y evalúa a algún otro valor con base en la 
+  condición. De la declaración de tipos está claro que @doesFileExist@ no
+  puede ser utilizado directamente por @if@:
+
+%  That is, it takes a @Bool@ value and evaluates to some other value based on
+%  the condition. From the type signatures it is clear that @doesFileExist@
+%  cannot be used directly by @if@:
 
 < wrong fileName =
 <   if doesFileExist fileName
 <     then ...
 <     else ...
 
-  That is, @doesFileExist@ results in an @IO Bool@ value, while @if@ wants a
-  @Bool@ value. Instead, the correct value must be ``extracted'' by running the
-  IO action:
+  Eso es, @doesFileExost@ resulta en un valor @IO Bool@, mientras que @if@ quiere
+  un valor @Bool@. El valor correcto debe ser ``extraído'' ejecutando la acción IO:
+
+%  That is, @doesFileExist@ results in an @IO Bool@ value, while @if@ wants a
+%  @Bool@ value. Instead, the correct value must be ``extracted'' by running the
+%  IO action:
 
 > right1 fileName = do
 >   exists <- doesFileExist fileName
@@ -1595,10 +1643,15 @@ mostrados.
 >     then return 1
 >     else return 0
 
-  Notice the use of @return@. Because @do@ puts us ``inside'' the @IO@ monad, we
-  can't ``get out'' except through @return@. Note that we don't have to use @if@
-  inline here---we can also use @let@ to evaluate the condition and get a value
-  first:
+  Note el uso de @return@. Como @do@ nos coloca ``dentro'' de la mónada @IO@, no 
+  podemos ``salir''excepto a través de @return@. Nótese que no tenemos que usar @if@
+  directamente aquí---también podemos usar @let@ para evaluar la condición y obtener
+  un resultado primero:
+
+%  Notice the use of @return@. Because @do@ puts us ``inside'' the @IO@ monad, we
+%  can't ``get out'' except through @return@. Note that we don't have to use @if@
+%  inline here---we can also use @let@ to evaluate the condition and get a value
+%  first:
 
 > right2 fileName = do
 >   exists <- doesFileExist fileName
@@ -1608,13 +1661,19 @@ mostrados.
 >           else 0
 >   return result
 
-  Again, notice where @return@ is. We don't put it in the @let@ statement.
-  Instead we use it once at the end of the function.
+  Una vez más, notar donde está @return@. No lo ponemos en la declaración @let@. En 
+  lugar de eso lo usamos una vez al final de la función.
+
+%  Again, notice where @return@ is. We don't put it in the @let@ statement.
+%  Instead we use it once at the end of the function.
 
   \sshd{Multiple @do@'s}\label{multiple-dos}
 
-  When using @do@ with @if@ or @case@, another @do@ is required if either branch
-  has multiple statements. An example with @if@:
+  Al usar @do@ con @if@ o @case@, se requiere otro @do@ is cualquier rama tiene múltiples
+  declaraciones. Un ejemplo con @if@:
+
+%  When using @do@ with @if@ or @case@, another @do@ is required if either branch
+%  has multiple statements. An example with @if@:
 
 > countBytes1 f =
 >   do
@@ -1632,7 +1691,9 @@ mostrados.
 >             show (length f)
 >             ++ " bytes long.")
 
-  And one with @case@:
+  Y uno con @case@:
+
+%  And one with @case@:
 
 > countBytes2 =
 >   do
@@ -1646,9 +1707,13 @@ mostrados.
 >          show (length f)
 >          ++ " bytes long.")
 
-  An alternative syntax uses semi-colons and braces. A @do@ is still required,
-  but indention is unnecessary. This code shows a @case@ example, but the
-  principle applies to @if@ as well:
+  Una sintaxis alternativa usa llaves y punto y coma. Todavía se requiere un @do@,
+  pero la sangría es innecesaria. Este código muestra un ejemplo de @case@, pero el
+  principio aplica igual con @if@:
+
+%  An alternative syntax uses semi-colons and braces. A @do@ is still required,
+%  but indention is unnecessary. This code shows a @case@ example, but the
+%  principle applies to @if@ as well:
 
 > countBytes3 =
 >   do
@@ -1663,58 +1728,86 @@ mostrados.
 
 \shd{Export}
 
-  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
+  Vea la sección \hyperref[module]{@module@} en la página~\pageref{module}.
+
+%  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
 
 \shd{If, Then, Else}\label{if}
 
-  Remember, @if@ always ``returns'' a value. It is an expression, not just a
-  control flow statement. This function tests if the string given starts with a
+  Recuerde, @if@ siempre ``devuelve'' un valor. Es una expresión, no solamente
+  una declaración de control de flujo. Esta función revisa si la cadena dada 
+  inicia con letra minúscula, y, de ser así, la convierte a mayúscula:
+
+%  Remember, @if@ always ``returns'' a value. It is an expression, not just a
+%  control flow statement. This function tests if the string given starts with a
   lower case letter and, if so, converts it to upper case:
 
-> -- Use pattern-matching to
-> -- get first character
+> -- Usa comparación de patrones
+> -- para obtener el primer caracter
 > sentenceCase (s:rest) =
 >  if isLower s
 >    then toUpper s : rest
 >    else s : rest
-> -- Anything else is empty string
+> -- Cualquier otro caso es 
+> -- sobre cadena vacía
 > sentenceCase _ = []
 
 \shd{Import}
 
-  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
+  Ver la sección \hyperref[module]{@module@} en la página~\pageref{module}.
+
+%  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
 
 \shd{In}
 
-  See \hyperref[let]{@let@} on page~\pageref{let}.
+  Ver \hyperref[let]{@let@} en la página~\pageref{let}.
+
+%  See \hyperref[let]{@let@} on page~\pageref{let}.
 
 \shd{Infix, infixl and infixr}
 
-  See the section on \hyperref[operators]{operators} on
-  page~\pageref{operators}.
+  Ver la sección \hyperref[operators]{operators} en la página~\pageref{operators}.
+
+%  See the section on \hyperref[operators]{operators} on
+%  page~\pageref{operators}.
 
 \shd{Instance}
 
-  See the section on \hyperref[class]{@class@} on page~\pageref{class}.
+  Ver la sección \hyperref[class]{@class@} en la página~\pageref{class}.
+
+%  See the section on \hyperref[class]{@class@} on page~\pageref{class}.
 
 \shd{Let}\label{let}
 
-  Local functions can be defined within a function using @let@. The @let@
-  keyword must always be followed by @in@. The @in@ must appear in the same
-  column as the @let@ keyword.  Functions defined have access to all other
-  functions and variables within the same scope (including those defined by
-  @let@). In this example, @mult@ multiplies its argument @n@ by @x@, which was
-  passed to the original @multiples@. @mult@ is used by map to give the
-  multiples of x up to 10:
+  Se pueden definir funciones localmente dentro de una función usando @let@.
+  La palabra clave @let@ debe siempre ser seguida por @in@. El @in@ debe aparecer
+  en la misma columna que la palabra clave @let@. Las funciones definidas tienen
+  acceso a todas las demás funciones y variables dentro del mismo contexto (incluyendo
+  las definidas por @let@). En este ejemplo, @mult@ multiplica su argumento @n@ por
+  @x@, que fue recibido del @multiples@ original. @mult@ es usado por @map@ para dar los
+  múltiplos de x por 1 hasta 10:
+
+%  Local functions can be defined within a function using @let@. The @let@
+%  keyword must always be followed by @in@. The @in@ must appear in the same
+%  column as the @let@ keyword.  Functions defined have access to all other
+%  functions and variables within the same scope (including those defined by
+%  @let@). In this example, @mult@ multiplies its argument @n@ by @x@, which was
+%  passed to the original @multiples@. @mult@ is used by map to give the
+%  multiples of x up to 10:
 
 > multiples x =
 >   let mult n = n * x
 >   in map mult [1..10]
 
-  @let@ ``functions'' with no arguments are actually constants and, once
-  evaluated, will not evaluate again. This is useful for capturing common
-  portions of your function and re-using them. Here is a silly example which
-  gives the sum of a list of numbers, their average, and their median:
+  Las ``funciones'' @let@ sin argumentos son en realidad constantes y, una vez que son
+  evaluadas, no serán evaluadas otra vez. Esto es útil para capturar porciones comunes de
+  su función y reutilizarlas. El siguiente es un ejemplo que da la suma de una lista de
+  números, su promedio, y su mediana:
+
+%  @let@ ``functions'' with no arguments are actually constants and, once
+%  evaluated, will not evaluate again. This is useful for capturing common
+%  portions of your function and re-using them. Here is a silly example which
+%  gives the sum of a list of numbers, their average, and their median:
 
 > listStats m =
 >   let numbers = [1,3 .. m]
@@ -1726,9 +1819,13 @@ mostrados.
 
   \sshd{Deconstruction}\label{deconstruction}
 
-  The left-hand side of a @let@ definition can also destructure its argument, in
-  case sub-components are to be accessed. This definition would extract the
-  first three characters from a string
+  El lado izquierdo de una definición @let@ puede también desestructurar su 
+  argumento, en caso de que se requiera acceso a sus sub-componentes. Esta
+  definición extraerá los primeros tres caracteres de una cadena:
+
+%  The left-hand side of a @let@ definition can also destructure its argument, in
+%  case sub-components are to be accessed. This definition would extract the
+%  first three characters from a string
 
 > firstThree str =
 >   let (a:b:c:_) = str
@@ -1737,8 +1834,11 @@ mostrados.
 >       show b ++ ", and " ++
 >       show c
 
-  Note that this is different than the following, which only works if the string
-  has exactly three characters:
+  Note que esto es diferente de lo que sigue, que solamente funciona si la cadena
+  tiene exactamente tres caracteres:
+
+%  Note that this is different than the following, which only works if the string
+%  has exactly three characters:
 
 > onlyThree str =
 >   let (a:b:c:[]) = str
@@ -1748,124 +1848,202 @@ mostrados.
 
 \shd{Of}
 
-  See the section on \hyperref[case]{@case@} on page~\pageref{case}.
+  Vea la sección \hyperref[case]{@case@} en la página~\pageref{case}.
+
+%  See the section on \hyperref[case]{@case@} on page~\pageref{case}.
 
 \shd{Module}\label{module}
 
-  A module is a compilation unit which exports functions, types, classes,
-  instances, and other modules. A module can only be defined in one file, though
-  its exports may come from multiple sources. To make a Haskell file a module,
-  just add a module declaration at the top:
+  Un módulo es una unidad de compilación que exporta funciones, tipos, clases,
+  instancias, y otros módulos. Un módulo solamente se puede definir en un 
+  solo archivo, aunque lo que exporte puede provenir de varias fuentes. Para 
+  convertir un archivo Haskell en módulo basta con agregar una declaración
+  de módulo hasta arriba:
+
+%  A module is a compilation unit which exports functions, types, classes,
+%  instances, and other modules. A module can only be defined in one file, though
+%  its exports may come from multiple sources. To make a Haskell file a module,
+%  just add a module declaration at the top:
 
 < module MyModule where
 
-  Module names must start with a capital letter but otherwise can include
-  periods, numbers and underscores. Periods are used to give sense of structure,
-  and Haskell compilers will use them as indications of the directory a
-  particular source file is, but otherwise they have no meaning.
+  Los nombres de módulo deben comenzar con letra mayúscula pero pueden contener
+  puntos, números y guiones bajos. Los puntos se usan para dar un sentido de
+  estructura, y los compiladores Haskell los utilizarán como indicadores del
+  directorio en el que está un archivo fuente en particular, pero fuera de eso
+  no tienen significado.
 
-  The Haskell community has standardized a set of top-level module names such as
-  @Data@, @System@, @Network@, etc. Be sure to consult them for an appropriate
-  place for your own module if you plan on releasing it to the public.
+%  Module names must start with a capital letter but otherwise can include
+%  periods, numbers and underscores. Periods are used to give sense of structure,
+%  and Haskell compilers will use them as indications of the directory a
+%  particular source file is, but otherwise they have no meaning.
+
+  La comunidad Haskell ha estandarizado un conjunto de nombres de módulo como @Data@,
+  @System@, @Network@, etc. Asegúrese de consultarlos para seleccionar un lugar 
+  apropiado para su propio módulo si planea liberarlo al público.
+
+%  The Haskell community has standardized a set of top-level module names such as
+%  @Data@, @System@, @Network@, etc. Be sure to consult them for an appropriate
+%  place for your own module if you plan on releasing it to the public.
 
   \sshd{Imports}\label{imports}
 
-  The Haskell standard libraries are divided into a number of modules. The
-  functionality provided by those libraries is accessed by importing into your
-  source file. To import everything exported by a library, just use the
-  module name:
+  Las bibliotecas estándar Haskell están divididas en un número de módulos. Se accede a
+  la funcionalidad provista por esas bibliotecas importándolas en el programa fuente. 
+  Para importar todo lo que exporta una biblioteca, simplemente use el nombre del módulo:
+
+%  The Haskell standard libraries are divided into a number of modules. The
+%  functionality provided by those libraries is accessed by importing into your
+%  source file. To import everything exported by a library, just use the
+%  module name:
 
 < import Text.Read
 
-  Everything means \emph{everything}: functions, data types and constructors,
-  class declarations, and even other modules imported and then exported by the
-  that module. Importing selectively is accomplished by giving a list of names
-  to import. For example, here we import some functions from @Text.Read@:
+  Todo significa \emph{todo}: funciones, tipos de datos y constructores, declaraciones
+  de clase, y aún otros módulos importados y luego exportados por ese módulo. Para importar
+  selectivamente se pasa una lista de nombres qué importar. Pr ejemplo, aquí importamos 
+  algunas funciones de @Text.Read@:
+
+%  Everything means \emph{everything}: functions, data types and constructors,
+%  class declarations, and even other modules imported and then exported by the
+%  that module. Importing selectively is accomplished by giving a list of names
+%  to import. For example, here we import some functions from @Text.Read@:
 
 < import Text.Read (readParen, lex)
 
-  Data types can imported in a number of ways. We can just import the type and
-  no constructors:
+  Los tipos de datos pueden ser importados de varias formas. Podemos solamente
+  importar el tipo sin constructores:
+
+%  Data types can imported in a number of ways. We can just import the type and
+%  no constructors:
 
 < import Text.Read (Lexeme)
 
-  Of course, this prevents our module from pattern-matching on the values of
-  type @Lexeme@. We can import one or more constructors explicitly:
+  Por supuesto, esto impide que nuestro módulo haga comparación de patrones con
+  los valores de tipo @Lexeme@. Podemos importar uno o más constructores explícitamente:
+
+%  Of course, this prevents our module from pattern-matching on the values of
+%  type @Lexeme@. We can import one or more constructors explicitly:
 
 < import Text.Read (Lexeme(Ident, Symbol))
 
-  All constructors for a given type can also be imported:
+  Se pueden importar todos los constructores para un tipo dado:
+
+%  All constructors for a given type can also be imported:
 
 < import Text.Read (Lexeme(..))
 
-  We can also import types and classes defined in the module:
+  Podemos también importar tipos y clases definidos en el módulo:
+
+%  We can also import types and classes defined in the module:
 
 < import Text.Read (Read, ReadS)
 
-  In the case of classes, we can import the functions defined for a class using
-  syntax similar to importing constructors for data types:
+  En el caso de las clases, podemos importar las funciones definidas para una 
+  clase usando una sintaxis similar a importar constructores para tipos de datos:
+
+%  In the case of classes, we can import the functions defined for a class using
+%  syntax similar to importing constructors for data types:
 
 < import Text.Read (Read(readsPrec
 <                       , readList))
 
-  Note that, unlike data types, all class functions are imported unless
-  explicitly excluded. To \emph{only} import the class, we use this syntax:
+  Note que, a diferencia de los tipos de datos, todas las funciones de clase son
+  importadas a menos que sean explícitamente excluídas. Para importar \emph{sólo}
+  las clases, usamos esta sintaxis:
+
+%  Note that, unlike data types, all class functions are imported unless
+%  explicitly excluded. To \emph{only} import the class, we use this syntax:
 
 < import Text.Read (Read())
 
   \sshd{Exclusions}\label{exclusions}
 
-  If most, but not all, names are to be imported from a module, it would be
-  tedious to list them all. For that reason, imports can also be specified via
-  the @hiding@ keyword:
+  Si la mayoría, pero no todos los nombres van a ser importados de un módulo,
+  sería tedioso listarlos. Por esa razón, también se pueden omitir nombres con
+  la palabra clave @hiding@ (``ocultar''):
+
+%  If most, but not all, names are to be imported from a module, it would be
+%  tedious to list them all. For that reason, imports can also be specified via
+%  the @hiding@ keyword:
 
 < import Data.Char hiding (isControl
 <                         , isMark)
 
-  Except for instance declarations, any type, function, constructor or class can
-  be hidden.
+  Excepto por las declaraciones de instancia, cualquier tipo, función o clase
+  pueden ser ocultos.
+
+%  Except for instance declarations, any type, function, constructor or class can
+%  be hidden.
 
   \sshd{Instance Declarations}\label{instance-declarations}
 
-  It must be noted that @instance@ declarations \emph{cannot} be excluded from
-  import: all @instance@ declarations in a module will be imported when the
-  module is imported.
+  Debe notarse que las declaraciones de instancia (@instance@) \emph{no pueden}
+  ser excluídas al importar; todas las declaraciones @instance@ en un módulo serán
+  importadas cuando el módulo sea importado.
+
+%  It must be noted that @instance@ declarations \emph{cannot} be excluded from
+%  import: all @instance@ declarations in a module will be imported when the
+%  module is imported.
 
   \sshd{Qualified Imports}\label{qualified-imports}
 
-  The names exported by a module (i.e., functions, types, operators, etc.) can
-  have a prefix attached through qualified imports. This is particularly useful
-  for modules which have a large number of functions having the same name as
-  @Prelude@ functions. @Data.Set@ is a good example:
+  Los nombres exportados por un módulo (i.e., funciones, tipos, operadores, etc.)
+  pueden tienen un prefijo asociado a través de importación calificada. Esto es
+  particularmente útil para módulos que tienen un gran número de funciones con el 
+  mismo nombre que funciones del @Prelude@. @Data.Set@ es un buen ejemplo:
+
+%  The names exported by a module (i.e., functions, types, operators, etc.) can
+%  have a prefix attached through qualified imports. This is particularly useful
+%  for modules which have a large number of functions having the same name as
+%  @Prelude@ functions. @Data.Set@ is a good example:
 
 < import qualified Data.Set as Set
 
-  This form requires any function, type, constructor or other name exported by
-  @Data.Set@ to now be prefixed with the \emph{alias} (i.e., @Set@) given. Here
-  is one way to remove all duplicates from a list:
+  Esta forma requiere que cualquier función, tipo, constructor u otro nombre 
+  exportado por @Data.Set@ tenga el prefijo del \em{alias} dado (i.e., @Set@).
+  La siguiente es una forma de remover todos los duplicados de una lista:
+
+%  This form requires any function, type, constructor or other name exported by
+%  @Data.Set@ to now be prefixed with the \emph{alias} (i.e., @Set@) given. Here
+%  is one way to remove all duplicates from a list:
 
 > removeDups a =
 >   Set.toList (Set.fromList a)
 
-  A second form does not create an alias. Instead, the prefix becomes the module
-  name. We can write a simple function to check if a string is all upper case:
+  Una segunda forma no crea un alias. En lugar de ello, el prefijo se convierte
+  en el nombre del módulo. Podemos escribir una función que verifique si una
+  cadena está escrita en todo mayúsculas:
+
+%  A second form does not create an alias. Instead, the prefix becomes the module
+%  name. We can write a simple function to check if a string is all upper case:
 
 < import qualified Char
 
 > allUpper str =
 >   all Char.isUpper str
 
-  Except for the prefix specified, qualified imports support the same syntax as
-  normal imports. The name imported can be limited in the same ways as described
-  above.
+  Excepto por el prefijo especificado, la importación calificada emplea la misma 
+  sintaxis que una importación normal. Los nombres importados se pueden limitar de 
+  las mismas formas descritas arriba.
+
+%  Except for the prefix specified, qualified imports support the same syntax as
+%  normal imports. The name imported can be limited in the same ways as described
+%  above.
 
   \sshd{Exports}\label{exports}
 
-  If an export list is not provided, then all functions, types, constructors,
-  etc. will be available to anyone importing the module. Note that any imported
-  modules are \emph{not} exported in this case. Limiting the names exported is
-  accomplished by adding a parenthesized list of names before the @where@
-  keyword:
+  Si no se provee una lista de exportaciones, entonces todas las funciones, tipos,
+  constructores, etc. estarán disponibles siempre que se importe el módulo. Note 
+  que los módulos importados \emph{no} son exportados en este caso. Limitar los
+  nombres exportados se consigue agregando una lista entre paréntesis de los nombres
+  antes de la palabra clave @where@:
+
+%  If an export list is not provided, then all functions, types, constructors,
+%  etc. will be available to anyone importing the module. Note that any imported
+%  modules are \emph{not} exported in this case. Limiting the names exported is
+%  accomplished by adding a parenthesized list of names before the @where@
+%  keyword:
 
 < module MyModule (MyType
 <   , MyClass
@@ -1873,10 +2051,15 @@ mostrados.
 <   ...)
 < where
 
-  The same syntax as used for importing can be used here to specify which
-  functions, types, constructors, and classes are exported, with a few
-  differences. If a module imports another module, it can also export that
-  module:
+  La misma sintaxis que se usa para importar puede ser usada para especificar
+  qué funciones, tipos, constructores, y clases son exportados, con unas pocas
+  diferencias. Si un módulo importa otro módulo, puede también exportar ese
+  módulo:
+
+%  The same syntax as used for importing can be used here to specify which
+%  functions, types, constructors, and classes are exported, with a few
+%  differences. If a module imports another module, it can also export that
+%  module:
 
 < module MyBigModule (module Data.Set
 <   , module Data.Char)
@@ -1885,9 +2068,13 @@ mostrados.
 < import Data.Set
 < import Data.Char
 
-  A module can even re-export itself, which can be useful when all local
-  definitions and a given imported module are to be exported. Below we export
-  ourselves and @Data.Set@, but not @Data.Char@:
+  Un módulo puede también re-exportarse a sí mismo, lo que puede ser útil cuando
+  todas las definiciones locales y un módulo importado dado van a se exportados. 
+  A continuación nos exportamos a nosotros mismos y a @Data.Set@, pero no a @Data.Char@:
+
+%  A module can even re-export itself, which can be useful when all local
+%  definitions and a given imported module are to be exported. Below we export
+%  ourselves and @Data.Set@, but not @Data.Char@:
 
 < module AnotherBigModule (module Data.Set
 <   , module AnotherBigModule)
@@ -1898,11 +2085,17 @@ mostrados.
 
 \shd{Newtype}\label{newtype}
 
-  While @data@ introduces new values and @type@ just creates synonyms, @newtype@
-  falls somewhere between. The syntax for @newtype@ is quite restricted---only
-  one constructor can be defined, and that constructor can only take one
-  argument. Continuing the above example, we can define a @Phone@ type as
-  follows:
+  Mientras que @data@ agrega nuevos valores y @type@ solamente crea sinónimos, 
+  @newtype@ está en un punto medio. La sintaxis para @newtype@ está más 
+  restringida---solamente se puede definir un constructor, y ese constructor 
+  solamente puede tomar un argumento. Continuando con el ejemplo de arriba, 
+  podemos definir un tipo @Phone@ de la forma que sigue:
+
+%  While @data@ introduces new values and @type@ just creates synonyms, @newtype@
+%  falls somewhere between. The syntax for @newtype@ is quite restricted---only
+%  one constructor can be defined, and that constructor can only take one
+%  argument. Continuing the above example, we can define a @Phone@ type as
+%  follows:
 
 > newtype Home = H String
 > newtype Work = W String
@@ -1910,91 +2103,151 @@ mostrados.
 
 \todo[use lowerName?]{lowerName function from above?}
 
-  As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
-  just @String@ values. The typechecker treats them as entirely new types. That
-  means our @lowerName@ function from above would not compile. The following
-  produces a type error:
+  En contraste con @type@, los ``valores'' @H@ y @W@ en @Phone@ \emph{no} son
+  solamente valores @String@. El verificador de tipos los trata como tipos
+  completamente nuevos. Eso significa que nuestra función @lowerName@ arriba
+  no compilaría. Esto produce un error de tipos:
+
+%  As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
+%  just @String@ values. The typechecker treats them as entirely new types. That
+%  means our @lowerName@ function from above would not compile. The following
+%  produces a type error:
 
 < lPhone (Phone hm wk) =
 <   Phone (lower hm) (lower wk)
 
-  Instead, we must use pattern-matching to get to the ``values'' to which we
-  apply @lower@:
+  En lugar de eso, debemos usar comparación de patrones para llegar a los ``valores''
+  a los que queremos aplicar @lower@:
+
+%  Instead, we must use pattern-matching to get to the ``values'' to which we
+%  apply @lower@:
 
 > lPhone (Phone (H hm) (W wk)) =
 >   Phone (H (lower hm)) (W (lower wk))
 
-  The key observation is that this keyword does not introduce a new value;
-  instead it introduces a new type. This gives us two very useful properties:
+  La observación clave es que esta palabra clave no crea un valor nuevo; en lugar
+  de eso crea un tipo nuevo. Esto proporciona dos propiedades muy útiles:
+
+%  The key observation is that this keyword does not introduce a new value;
+%  instead it introduces a new type. This gives us two very useful properties:
 
   \begin{compactitem}
-  \item No runtime cost is associated with the new type, since it does not
-  actually produce new values. In other words, newtypes are absolutely free!
+ 
+  \item No hay costo en tiempo de ejecución asociado al tipo nuevo, porque en
+  realidad no produce valores nuevos. En otras palabras, @newtype@ es absolutamente
+  gratis en desempeño cuando el programa es ejecutado.
 
-  \item The type-checker is able to enforce that common types such as @Int@ or
-  @String@ are used in restricted ways, specified by the programmer.
+%  \item No runtime cost is associated with the new type, since it does not
+%  actually produce new values. In other words, newtypes are absolutely free!
+
+  \item El verificador de tipos puede hacer que tipos comunes como @Int@ o 
+  @String@ se usen de formas restringidas, especificadas por el programador.
+
+%  \item The type-checker is able to enforce that common types such as @Int@ or
+%  @String@ are used in restricted ways, specified by the programmer.
+
   \end{compactitem}
 
-  Finally, it should be noted that any @deriving@ clause which can be attached
-  to a @data@ declaration can also be used when declaring a @newtype@.
+  Finalmente, se debe notar que cualquier cláusula @deriving@ que puede ser 
+  anexada a una declaración @data@ puede también ser usada al declarar un 
+  @newtype@.
+
+%  Finally, it should be noted that any @deriving@ clause which can be attached
+%  to a @data@ declaration can also be used when declaring a @newtype@.
 
 \shd{Return}
 
-  See \hyperref[do]{@do@} on page~\pageref{do}.
+  Ver \hyperref[do]{@do@} en la página~\pageref{do}.
+
+%  See \hyperref[do]{@do@} on page~\pageref{do}.
 
 \shd{Type}\label{type}
 
-  This keyword defines a \emph{type synonym} (i.e., alias). This keyword does
-  not define a new type, like @data@ or @newtype@. It is useful for documenting
-  code but otherwise has no effect on the actual type of a given function or
-  value. For example, a @Person@ data type could be defined as:
+  Esta palabra clave define un \emph{sinónimo de tipo} (i.e., alias). Esta
+  palabra clave no define un tipo nuevo, como @data@ o @newtype@. Es útil para 
+  documentar código pero, además de eso, no tiene efecto en el tipo de una 
+  función o valor dados. Por ejemplo, un tipo de datos @Person@ puede ser 
+  definido como:
+
+%  This keyword defines a \emph{type synonym} (i.e., alias). This keyword does
+%  not define a new type, like @data@ or @newtype@. It is useful for documenting
+%  code but otherwise has no effect on the actual type of a given function or
+%  value. For example, a @Person@ data type could be defined as:
 
 <  data Person = Person String String
 
-  where the first constructor argument represents their first name and the
-  second their last. However, the order and meaning of the two arguments is not
-  very clear. A @type@ declaration can help:
+  donde el argumento del primer constructor representa al nombre y el segundo al
+  apellido. Sin embargo, el orden y significado de los dos argumentos no es muy
+  claro. Una declaración con @type@ puede ayudar:
+
+%  where the first constructor argument represents their first name and the
+%  second their last. However, the order and meaning of the two arguments is not
+%  very clear. A @type@ declaration can help:
 
 > type FirstName = String
 > type LastName = String
 > data Person = Person FirstName LastName
 
-  Because @type@ introduces a synonym, type checking is not affected in any way.
-  The function @lower@, defined as:
+  Como @type@ crea un sinónimo, la verificación de tipos no se afecta. La función
+  @lower@, definida como:
+
+%  Because @type@ introduces a synonym, type checking is not affected in any way.
+%  The function @lower@, defined as:
 
 > lower s = map toLower s
 
-  which has the type
+  que tiene tipo
+
+%  which has the type
 
 < lower :: String -> String
 
-  can be used on values with the type @FirstName@ or @LastName@ just as easily:
+  puede ser usada igual en valores con tipo @FirstName@ o @LastName@:
+
+%  can be used on values with the type @FirstName@ or @LastName@ just as easily:
 
 > lName (Person f l ) =
 >   Person (lower f) (lower l)
 
-  Because @type@ is just a synonym, it cannot declare multiple constructors the
-  way @data@ can. Type variables can be used, but there cannot be more than the
-  type variables declared with the original type. That means a synonym like the
-  following is possible:
+  Como @type@ es solamente un sinónimo, no puede declarar múltiples constructores
+  de la forma que @data@ puede. Se pueden usar variables de tipo, pero no puede haber
+  más que las las variables de tipo declaradas con el tipo original. Eso significa que
+  un sinónimo como el siguiente es válido:
+
+%  Because @type@ is just a synonym, it cannot declare multiple constructors the
+%  way @data@ can. Type variables can be used, but there cannot be more than the
+%  type variables declared with the original type. That means a synonym like the
+%  following is possible:
 
 < type NotSure a = Maybe a
 
-  but this not:
+  pero este no:
+
+%  but this not:
 
 < type NotSure a b = Maybe a
 
-  Note that \emph{fewer} type variables can be used, which useful in certain
-  instances.
+  Nótese que se pueden usar \emph{menos} variables de tipo, lo que es útil en
+  ciertas circunstancias.
+
+%  Note that \emph{fewer} type variables can be used, which useful in certain
+%  instances.
 
 \shd{Where}\label{where}
 
-  Similar to @let@, @where@ defines local functions and constants. The scope of
-  a @where@ definition is the current function. If a function is broken into
-  multiple definitions through pattern-matching, then the scope of a particular
-  @where@ clause only applies to that definition. For example, the function
-  @result@ below has a different meaning depending on the arguments given to the
-  function @strlen@:
+  De la misma forma que @let@, @where@ define funciones y constantes locales. El
+  contexto de una definición @where@ es la función actual. Si una función está
+  dividida en definiciones múltiples con comparación de patrones, entonces el
+  contexto de una cláusula @where@ en particular solamente aplica a esa definición.
+  Por ejemplo, la función @result@ a continuación tiene un significado diferente
+  dependiendo de los argumentos proporcionados a la función @strlen@:
+
+%  Similar to @let@, @where@ defines local functions and constants. The scope of
+%  a @where@ definition is the current function. If a function is broken into
+%  multiple definitions through pattern-matching, then the scope of a particular
+%  @where@ clause only applies to that definition. For example, the function
+%  @result@ below has a different meaning depending on the arguments given to the
+%  function @strlen@:
 
 > strlen [] = result
 >   where result = "No string given!"
@@ -2003,11 +2256,21 @@ mostrados.
 
   \sshd{Where vs. Let}\label{where-vs-let}
 
-  A @where@ clause can only be defined at the level of a function definition.
-  Usually, that is identical to the scope of @let@ definition. The only
-  difference is when guards are being used. The scope of the @where@ clause
-  extends over all guards. In contrast, the scope of a @let@ expression is only
-  the current function clause \emph{and} guard, if any.
+  Una cláusula @where@ solamente puede ser definida al nivel de una definición de
+  función. Usualmente, eso es idéntico al contexto de una definición @let@. La 
+  única diferencia es en cuándo son utilizadas las guardas. En contraste, el
+  contexto de una expresión @let@ es solamente la cláusula actual de la función 
+  \emph{y} la guarda, de existir.
+
+%  A @where@ clause can only be defined at the level of a function definition.
+%  Usually, that is identical to the scope of @let@ definition. The only
+%  difference is when guards are being used. The scope of the @where@ clause
+%  extends over all guards. In contrast, the scope of a @let@ expression is only
+%  the current function clause \emph{and} guard, if any.
+
+% \hd{Traducción al Español}\label{translatees}
+
+%  Jaime Soffer, jaime.soffer@gmail.com
 
 \hd{Contributors}\label{contributors}
 
@@ -2024,6 +2287,9 @@ mostrados.
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
   (\url{http://blog.codeslower.com/}) for other projects and writings.
+
+%  Traducción al Español version 0.01 sobre la versión original mencionada
+%  arriba. Repositorio en http://github.com/jsoffer/cheatsheet
 
 \todos
 \end{multicols}
