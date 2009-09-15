@@ -41,7 +41,7 @@
 \setlength{\columnseprule}{0.4pt}
 \begin{document}
 \begin{multicols}{3}
-\section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
+\section*{\textsf{\LARGE Guía Rápida de Haskell\normalsize}}\label{preamble}
 
 Esta guía rápida abarca los elementos fundamentales del lenguaje Haskell:
 sintaxis, palabras clave y otros elementos. Se presenta como un archivo 
@@ -68,9 +68,9 @@ mostrados.
 
 \end{comment}
 
-\hd{Basic Syntax}\label{syntax}
+\hd{Sintaxis Básica}\label{syntax}
 
-\shd{Comments}\label{comments}
+\shd{Comentarios}\label{comments}
 
   Un comentario de una sola línea comienza con `@--@' y se extiende hasta el
   final de la línea. Los comentarios de varias líneas comienzan con '@{-@' y se 
@@ -89,7 +89,7 @@ mostrados.
 %  Haddock, a system for documenting
 %  Haskell code.
 
-\shd{Palabras reservadas}\label{reserved-words}
+\shd{Palabras Reservadas}\label{reserved-words}
 
 %\shd{Reserved Words}\label{reserved-words}
 
@@ -194,7 +194,7 @@ mostrados.
   \end{compactitem}
   
 
-\shd{Numbers}\label{numbers}
+\shd{Números}\label{numbers}
 
   \begin{compactitem}
   \item @1@ -- Entero o valor de punto flotante.
@@ -209,7 +209,7 @@ mostrados.
 % \item  @-1@ -- Negative number; the minus sign (``@-@'') cannot be separated from the number.
   \end{compactitem}
 
-\shd{Enumerations}\label{enumerations}
+\shd{Enumeraciones}\label{enumerations}
 
   \begin{compactitem}
   \item @[1..10]@ -- Lista de números -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
@@ -238,7 +238,7 @@ mostrados.
 %  \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
   \end{compactitem}
 
-\shd{Lists \& Tuples}\label{lists-tuples}
+\shd{Listas \& Tuplas}\label{lists-tuples}
 
   \begin{compactitem}
   \item @[]@ -- Lista vacía.
@@ -257,9 +257,9 @@ mostrados.
 %  \item @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
   \end{compactitem}
 
-\shd{``Layout'' rule, braces and semi-colons.}\label{layout}
+\shd{Regla ``Layout'', llaves y punto y comas}\label{layout}
 
- Se puede escribir Haskell utilizando llaves y puntos y coma, igual que en C. 
+ Se puede escribir Haskell utilizando llaves y punto y comas, igual que en C. 
  Sin embargo, nadie lo hace. En lugar de eso se emplea la regla ``layout'', donde
  se emplea espacio en blanco para separar contextos. La regla general es: siempre 
  usar sangrías. Cuando el compilador se queje, usar más.
@@ -268,7 +268,7 @@ mostrados.
 % one does. Instead, the ``layout'' rule is used, where spaces represent scope.
 % The general rule is: always indent. When the compiler complains, indent more.
 
-  \sshd{Braces and semi-colons}\label{braces-semicolons}
+  \sshd{Llaves y punto y comas}\label{braces-semicolons}
 
   Los paréntesis finalizan una expresión, y las llaves representan contextos. Pueden
   ser utilizados después de varias palabras clave: @where@, @let@, @do@ y @of@. No
@@ -289,7 +289,7 @@ mostrados.
 > square2 x = result
 >     where { result = x * x; }
 
-  \sshd{Function Definition}\label{layout-function-definition}
+  \sshd{Definición de funciones}\label{layout-function-definition}
 
   Aplique una sangría de al menos un espacio a partir del nombre de la función:
 
@@ -336,7 +336,7 @@ mostrados.
 %  @let@. Finally, when multiple definitions are given, all identifiers must
 %  appear in the same column.
 
-\hd{Declarations, Etc.}\label{declarations}
+\hd{Declaraciones, Etc.}\label{declarations}
 
   La siguiente sección describe las reglas para la declaración de funciones, las listas por
   comprensión, y otras áreas del lenguaje.
@@ -344,7 +344,7 @@ mostrados.
 %  The following section details rules on function declarations, list
 %  comprehensions, and other areas of the language.
 
-\shd{Function Definition}\label{function-definition}
+\shd{Definición de Funciones}\label{function-definition}
 
   Las funciones se definen declarando su nombre, los argumentos, y un signo de igual:
 
@@ -359,7 +359,7 @@ mostrados.
 %  \emph{All} functions names must start with a lowercase letter or ``@_@''. It
 %  is a syntax error otherwise.
 
-  \sshd{Pattern Matching}\label{pattern-matching}
+  \sshd{Comparación de patrones}\label{pattern-matching}
 
   Se pueden definir varias ``cláusulas'' de una función haciendo ``comparación de patrones''
   en los valores de los argumentos. Aquí, la función @agree@ tiene cuatro casos separados:
@@ -437,7 +437,7 @@ mostrados.
 > isEven 1 = False
 > isEven (n + 2) = isEven n
 
-  \sshd{Argument Capture}\label{argument-capture}
+  \sshd{Captura de Argumentos}\label{argument-capture}
 
   La captura de argumentos es útil para comparar un patrón \emph{y} utilizarlo, sin
   declarar una variable extra. Utilice un símbolo `|@|' entre el patrón a coincidir y 
@@ -456,7 +456,7 @@ mostrados.
 >   show (length ls) ++ " items long."
 > len [] = "List is empty!"
 
-  \sshd{Guards}\label{function-guards}
+  \sshd{Guardas}\label{function-guards}
 
   Las funciones booleanas se pueden utilizar como ``guardas'' en definicione de 
   función al mismo tiempo que la comparación de patrones. Un ejemplo sin comparación
@@ -488,7 +488,7 @@ mostrados.
 >   | isLower c = "Minúscula"
 >   | otherwise = "No es letra"
 
-  \sshd{Matching \& Guard Order}\label{function-matching-order}
+  \sshd{Comparación \& Orden de las Guardas}\label{function-matching-order}
 
   La comparación de patrones procede en un orden de arriba hacia abajo. De la misma
   forma, las expresiones con guarda son evaluadas de la primera a la última. Por 
@@ -505,7 +505,7 @@ mostrados.
 >   | otherwise = False
 >   | n `div` 2 == 0 = True
 
-  \sshd{Record Syntax}\label{matching-record-syntax}
+  \sshd{Sintaxis de Registros}\label{matching-record-syntax}
 
   Normalmente la comparación de patrones ocurre basándose en la posición en
   los argumentos del valor a coincidir. Los tipos que se declaran con 
@@ -554,7 +554,7 @@ mostrados.
 > setGreen (P col@(C {green = 0})) = P col
 > setGreen _ = P (C 0 0 0)
 
-  \sshd{Lazy Patterns}\label{lazy-patterns}
+  \sshd{Patrones Perezosos}\label{lazy-patterns}
 
   Esta sintaxis, también conocida como patrones \emph{irrefutables}, permite 
   hacer comparación de patrones que siempre coincida. Esto significa que cualquier
@@ -636,7 +636,7 @@ mostrados.
 > -- Return "Just ' '"
 > defMC = defValue (Nothing :: Maybe Char)
 
-\shd{List Comprehensions}\label{list-comprehensions}
+\shd{Listas por Comprensión}\label{list-comprehensions}
 
   Una lista por comprensión consiste de cuatro tipos de elementos: \emph{generadores},
   \emph{guardas}, \emph{asociaciones locales}, y \emph{objetivos}. Una lista por 
@@ -710,7 +710,7 @@ mostrados.
 %  A unique feature of list comprehensions is that pattern matching failures do
 %  not cause an error; they are just excluded from the resulting list.
 
-\shd{Operators}\label{operators}
+\shd{Operadores}\label{operators}
 
   Hay muy pocos ``operadores'' predefinidos en Haskell---muchos que parecen estar
   predefinidos en realidad son sintaxis (e.g. ``@=@''). En lugar de eso, los 
@@ -769,7 +769,7 @@ mostrados.
 %  used as part of multi-character operator. The ``bind'' function, @>>=@, is one
 %  example.
 
-  \sshd{Precedence \& Associativity}\label{fixity}
+  \sshd{Precedencia \& Asociatividad}\label{fixity}
 
   La precedencia y asociatividad, colectivamente llamadas \emph{fijidad}, de cualquier
   operador, pueden ser establecidos a través de las palabras clave @infix@, @infixr@ e
@@ -922,7 +922,7 @@ mostrados.
 % One way to think of this is that each ``arrow'' in the function's signature
 % represents a new function which can be created by supplying one more argument.
 
- \sshd{Sections}\label{sections}
+ \sshd{Secciones}\label{sections}
 
  Los operadores son funciones, y pueden ser currificados como cualquier otro. 
  Por ejemplo, una versión currificada de ``@+@'' se puede escribir como:
@@ -959,7 +959,7 @@ mostrados.
 < > onRight "foo" "bar"
 < "foobar"
 
-\shd{``Updating'' values and record syntax}\label{updating}
+\shd{``Actualizando'' Valores y la Sintaxis de Registros }\label{updating}
 
   Haskell es un lenguaje puro y, como tal, no tiene estado mutable. Eso es, una
   vez que un valor ha sido establecido nunca cambia. ``Actualizar'' es en realidad
@@ -1005,7 +1005,7 @@ mostrados.
 %  pattern matching with record syntax (``|C { red = r}|'') to get the inner
 %  @red@ field.
 
-\shd{Anonymous Functions}\label{anonymous-functions}
+\shd{Funciones Anónimas}\label{anonymous-functions}
 
   Una función anónima (i.e., una \emph{expresión lambda} o simplemente \emph{lambda})
   es una función sin nombre. Pueden ser definidas en cualquier momento de la
@@ -1119,7 +1119,7 @@ mostrados.
 > neg y | y > 0 = negate y
 >       | otherwise = y
 
-  \sshd{Type Annotations}\label{type-annotations}
+  \sshd{Anotaciones de Tipo}\label{type-annotations}
 
   Algunas veces Haskell no puede determinar qué tipo se debe aplicar.
   La demostración clásica de esto es el denominado problema ``@show . read@'':
@@ -1150,7 +1150,7 @@ mostrados.
 %  @read x@) binds tighter than annotations. If that was not the case,
 %  the above would need to be written @(read x) :: Int@.
 
-\shd{Unit}\label{unit}
+\shd{Unidad}\label{unit}
 
   @()@ -- tipo ``unidad'' y valor ``unidad''. El valor y tipo que no representa
   información útil.
@@ -1158,7 +1158,7 @@ mostrados.
 %  @()@ -- ``unit'' type and ``unit'' value. The value and type that represents
 %  no useful information.
 
-\hd{Keywords}\label{keywords}
+\hd{Palabras Clave}\label{keywords}
 
   Las palabras clave en Haskell están listadas a continuación, en orden alfabético.
 
@@ -1198,7 +1198,7 @@ mostrados.
 %  As with pattern-matching in function definitions, the `@_@' token is a
 %  ``wildcard'' matching any value.
 
-  \sshd{Nesting \& Capture}\label{nesting-capture}
+  \sshd{Anidado \& Captura}\label{nesting-capture}
 
   Se permite hacer comparación y asociación anidadas.
 
@@ -1236,7 +1236,7 @@ mostrados.
 >         ++ show score
 >     _ -> "Not first."
 
-  \sshd{Matching Order}\label{case-matching-order}
+  \sshd{Orden de Comparación}\label{case-matching-order}
 
   La comparación procede de arriba hacia abajo. Si el orden de @anyChoice@ se 
   modifica de la siguiente forma, el primer patrón siempre tendrá éxito:
@@ -1251,7 +1251,7 @@ mostrados.
 >     Just (First _) -> "First!"
 >     Just Second -> "Second!"
 
-  \sshd{Guards}\label{case-guards}
+  \sshd{Guardas}\label{case-guards}
 
   Las guardas, o comparaciones condicionales, se pueden utilizar en casos igual que
   en la definición de funciones. La única diferencia es el uso de @->@ en lugar de @=@.
@@ -1270,7 +1270,7 @@ mostrados.
 >     | otherwise -> False
 >   _ -> False
 
-\shd{Class}\label{class}
+\shd{Clases}\label{class}
 
   Una función en Haskell es definida para funcionar con un cierto tipo o conjunto
   de tipos y no puede ser definida más de una vez. Muchos lenguajes cuentan con el
@@ -1390,7 +1390,7 @@ mostrados.
 %  separated with the `@|@' character. Note that type and constructor names
 %  \emph{must} start with a capital letter. It is a syntax error otherwise.
 
-  \sshd{Constructors with Arguments}\label{constructors-with-arguments}
+  \sshd{Constructores con Argumentos}\label{constructors-with-arguments}
 
   El tipo arriba noes muy interesante excepto como una enumeración. Se pueden declarar
   constructores que tomen argumentos, permitiendo que se almacene más información:
@@ -1415,7 +1415,7 @@ mostrados.
 
 > data Poly = Triangle Point Point Point
 
-  \sshd{Type and Constructor Names}\label{type-punning}
+  \sshd{Nombres de Tipos y de Constructores}\label{type-punning}
 
   Los tipos y constructores pueden tener el mismo nombre, porque nunca serán
   utilizados de forma que pudiera causar conflicto. Por ejemplo:
@@ -1438,7 +1438,7 @@ mostrados.
 
 %  Some literature refers to this practice as \emph{type punning}.
 
-  \sshd{Type Variables}\label{type-variables}
+  \sshd{Variables de Tipo}\label{type-variables}
 
   Declarar tipos de datos \emph{polimórficos} es tan fácil como agregar variables
   de tipo en la declaración:
@@ -1467,7 +1467,7 @@ mostrados.
 %  Above, the @Slot2@ constructor can take a value of any type and an @Int@
 %  value.
 
-  \sshd{Record Syntax}\label{record-syntax}
+  \sshd{Sintaxis de Registro}\label{record-syntax}
 
   Se pueden declarar los argumentos del constructor ya sea por su posición, como se hace
   arriba, o utilizando sintaxis de registros, que le da un nombre a cada argumento. Por 
@@ -1514,7 +1514,7 @@ mostrados.
 %  Finally, as explained elsewhere, these names can be used for pattern matching,
 %  argument capture and ``updating.''
 
-  \sshd{Class Constraints}\label{class-constraints}
+  \sshd{Restricciones de Clase}\label{class-constraints}
 
   Se pueden declarar tipos de datos con restricciones de clase en las variables
   de tipo, pero en general esta práctica es desaprobada. Generalmente es mejor
@@ -1599,7 +1599,7 @@ mostrados.
 %  context. Statements are separated by newlines, assignment is indicated by
 %  @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
 
-  \sshd{If and IO}\label{if-io}
+  \sshd{If con IO}\label{if-io}
 
   @if@ puede ser complicado cuando se utiliza con IO. Conceptualmente no es diferente
   de un @if@ en cualquier otro contexto, pero intuitivamente es difícil de asimilar.
@@ -1667,7 +1667,7 @@ mostrados.
 %  Again, notice where @return@ is. We don't put it in the @let@ statement.
 %  Instead we use it once at the end of the function.
 
-  \sshd{Multiple @do@'s}\label{multiple-dos}
+  \sshd{@do@'s Multiples}\label{multiple-dos}
 
   Al usar @do@ con @if@ o @case@, se requiere otro @do@ is cualquier rama tiene múltiples
   declaraciones. Un ejemplo con @if@:
@@ -1764,7 +1764,7 @@ mostrados.
 
 %  See \hyperref[let]{@let@} on page~\pageref{let}.
 
-\shd{Infix, infixl and infixr}
+\shd{Infix, infixl e infixr}
 
   Ver la sección \hyperref[operators]{operators} en la página~\pageref{operators}.
 
@@ -1817,7 +1817,7 @@ mostrados.
 >   in "total: " ++ show total ++
 >      ", mid: " ++ show mid
 
-  \sshd{Deconstruction}\label{deconstruction}
+  \sshd{Deconstrucción}\label{deconstruction}
 
   El lado izquierdo de una definición @let@ puede también desestructurar su 
   argumento, en caso de que se requiera acceso a sus sub-componentes. Esta
@@ -1886,7 +1886,7 @@ mostrados.
 %  @Data@, @System@, @Network@, etc. Be sure to consult them for an appropriate
 %  place for your own module if you plan on releasing it to the public.
 
-  \sshd{Imports}\label{imports}
+  \sshd{Import}\label{imports}
 
   Las bibliotecas estándar Haskell están divididas en un número de módulos. Se accede a
   la funcionalidad provista por esas bibliotecas importándolas en el programa fuente. 
@@ -1957,7 +1957,7 @@ mostrados.
 
 < import Text.Read (Read())
 
-  \sshd{Exclusions}\label{exclusions}
+  \sshd{Exclusiones}\label{exclusions}
 
   Si la mayoría, pero no todos los nombres van a ser importados de un módulo,
   sería tedioso listarlos. Por esa razón, también se pueden omitir nombres con
@@ -1976,7 +1976,7 @@ mostrados.
 %  Except for instance declarations, any type, function, constructor or class can
 %  be hidden.
 
-  \sshd{Instance Declarations}\label{instance-declarations}
+  \sshd{Declaraciones de Instancia}\label{instance-declarations}
 
   Debe notarse que las declaraciones de instancia (@instance@) \emph{no pueden}
   ser excluídas al importar; todas las declaraciones @instance@ en un módulo serán
@@ -1986,7 +1986,7 @@ mostrados.
 %  import: all @instance@ declarations in a module will be imported when the
 %  module is imported.
 
-  \sshd{Qualified Imports}\label{qualified-imports}
+  \sshd{Import Qualified}\label{qualified-imports}
 
   Los nombres exportados por un módulo (i.e., funciones, tipos, operadores, etc.)
   pueden tienen un prefijo asociado a través de importación calificada. Esto es
@@ -2031,7 +2031,7 @@ mostrados.
 %  normal imports. The name imported can be limited in the same ways as described
 %  above.
 
-  \sshd{Exports}\label{exports}
+  \sshd{Export}\label{exports}
 
   Si no se provee una lista de exportaciones, entonces todas las funciones, tipos,
   constructores, etc. estarán disponibles siempre que se importe el módulo. Note 
@@ -2268,9 +2268,9 @@ mostrados.
 %  extends over all guards. In contrast, the scope of a @let@ expression is only
 %  the current function clause \emph{and} guard, if any.
 
-% \hd{Traducción al Español}\label{translatees}
+\hd{Traducción al Español}\label{translatees}
 
-%  Jaime Soffer, jaime.soffer@gmail.com
+ Jaime Soffer, jaime.soffer@@gmail.com
 
 \hd{Contributors}\label{contributors}
 
@@ -2288,8 +2288,8 @@ mostrados.
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
   (\url{http://blog.codeslower.com/}) for other projects and writings.
 
-%  Traducción al Español version 0.01 sobre la versión original mencionada
-%  arriba. Repositorio en http://github.com/jsoffer/cheatsheet
+ Traducción al Español version 0.01 sobre la versión original mencionada
+ arriba. Repositorio en http://github.com/jsoffer/cheatsheet
 
 \todos
 \end{multicols}
