@@ -184,7 +184,7 @@ mostrados.
 %  \sshd{Escape Codes} The following escape codes can be used in characters or strings:
   \begin{compactitem}
     \item @\n@, @\r@, @\f@, etc. -- Los códigos estándar para fin de línea, retorno de carro, avance de línea, etc. 
-    \item @\72@, @\x48@, \@o110@ -- Un caracter con el valor 72 en decimal, hexadecimal y octal, respectivamente. 
+    \item @\72@, @\x48@, @\o110@ -- Un caracter con el valor 72 en decimal, hexadecimal y octal, respectivamente. 
     \item @\&@ -- El caracter de escape ``null'', es utilizado para que los códigos de escape numéricos puedan aparecer junto de las literales numéricas. Es equivalente a ``'' y por lo tanto no puede ser utilizado en literales de caracter. 
     \todo{Caracteres de control, códigos ascii como NUL}
 %    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
