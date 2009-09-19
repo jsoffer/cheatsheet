@@ -299,7 +299,7 @@ mostrados.
 <   x * x
 
   A menos que esté presente una cláusula @where@. En ese caso, aplique la sangría
-  de la cláusula @where@ al menos un espacio a partir del nombre de la función y
+  de la cláusula @where@ al menos un espacio a partir del nombre de la función, y
   todos los cuerpos de la función al menos a un espacio a partir de la palabra clave
   @where@:
 
@@ -419,7 +419,7 @@ mostrados.
 %  Note that @str@ above is similer to @_@ in that it will match anything; the
 %  only difference is that the value matched is also given a name.
 
-  \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
+  \sshd{Patrones {\ensuremath $n + k$}}\label{plus-patterns}
 
   Esta (a veces controversial) comparación de patrones hace fácil coincidir con ciertos
   tipos de expresiones numéricas. La idea es definir un caso base (la porción ``$n$'') con
@@ -877,8 +877,8 @@ mostrados.
 
 < l33t :: String -> String
 
- Eso es, @l33t@ toma una cadena y produce una cadena. Es ``contante'' en el sentido
- de que @l33t@ siempre regresa un valos que es una función que toma una cadena y 
+ Eso es, @l33t@ toma una cadena y produce una cadena. Es ``constante'' en el sentido
+ de que @l33t@ siempre regresa un valor que es una función que toma una cadena y 
  produce una cadena. @l33t@ regresa una versión ``currificada'' de @convertOnly@, 
  donde solamente dos de sus tres argumentos han sido provistos.
 
